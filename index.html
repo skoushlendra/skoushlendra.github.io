@@ -1,0 +1,6614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="i/favicon.png" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <!-- Bootstrap 4.5.2 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Slick 1.8.1 jQuery plugin CSS (Sliders) -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- Fancybox 3 jQuery plugin CSS (Open images and video in popup) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"/>
+    <!-- AOS 2.3.4 jQuery plugin CSS (Animations) -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- Startup CSS (Styles for all blocks) - Remove ".min" if you would edit a css code -->
+    <link href="css/style.min.css" rel="stylesheet"/>
+    <!-- jQuery 3.5.1 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+			.row-striped:nth-of-type(odd){
+			  background-color: #efefef;
+			  border-left: 4px #000000 solid;
+			}
+
+			.row-striped:nth-of-type(even){
+			  background-color: #ffffff;
+			  border-left: 4px #efefef solid;
+			}
+
+			.row-striped {
+				padding: 15px 0;
+			}
+			ul.scheduled-events {
+				margin: 10px 0px;
+			}
+
+
+
+
+    </style>
+    <style type="text/css">.eapps-preview {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 150px;
+  min-height: 100%;
+  transition: 0.2s;
+}
+.eapps-preview-toolbar {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  z-index: 10;
+}
+@media only screen and (max-width: 480px) {
+  .eapps-preview-toolbar {
+    display: none;
+  }
+}
+.eapps-preview-toolbar-item {
+  position: relative;
+}
+.eapps-preview-toolbar-item-trigger {
+  box-sizing: border-box;
+  padding: 3px 6px;
+  background: #38393a;
+  cursor: pointer;
+}
+.eapps-preview-toolbar-item-trigger:first-child {
+  padding-top: 6px;
+}
+.eapps-preview-toolbar-item-trigger:last-child {
+  padding-bottom: 6px;
+}
+.eapps-preview-toolbar-item-trigger:hover .eapps-preview-toolbar-item-icon svg {
+  fill: #fff;
+}
+.eapps-preview-toolbar-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+}
+.eapps-preview-toolbar-item-active .eapps-preview-toolbar-item-icon {
+  background: #2c2c2d;
+}
+.eapps-preview-toolbar-item-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: #66686a;
+  transition: 0.1s;
+}
+.eapps-preview-toolbar-item-active .eapps-preview-toolbar-item-icon svg {
+  fill: #fff;
+}
+.eapps-preview-toolbar-item-values {
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0px;
+  right: 38px;
+  padding: 0 2px;
+  border-radius: 2px;
+  transition: 0.2s;
+  opacity: 0;
+  background: #38393a;
+}
+.eapps-preview-toolbar-item-active .eapps-preview-toolbar-item-values {
+  visibility: visible;
+  opacity: 1;
+  right: 42px;
+}
+.eapps-preview-toolbar-item-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 4px 2px;
+  cursor: pointer;
+}
+.eapps-preview-toolbar-item-value-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+}
+html {
+  height: 100%;
+  overflow: auto;
+}
+body {
+  margin: 0;
+  height: 100%;
+  background: #38393a;
+}
+.widget {
+  max-width: 100%;
+}
+.eapps-preview-background-white {
+  background: #fff;
+}
+.eapps-preview-background-black {
+  background: #252627;
+  color: #fff;
+}
+.eapps-preview-background-white-chess {
+  background-image: url(data:image/png;base64,/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAUAAA/+4AJkFkb2JlAGTAAAAAAQMAFQQDBgoNAAABpgAAAccAAAIDAAACMP/bAIQAAgICAgICAgICAgMCAgIDBAMCAgMEBQQEBAQEBQYFBQUFBQUGBgcHCAcHBgkJCgoJCQwMDAwMDAwMDAwMDAwMDAEDAwMFBAUJBgYJDQsJCw0PDg4ODg8PDAwMDAwPDwwMDAwMDA8MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM/8IAEQgAFAAUAwERAAIRAQMRAf/EAH8AAAMBAQAAAAAAAAAAAAAAAAIDBAEIAQEAAAAAAAAAAAAAAAAAAAAAEAACAwEAAAAAAAAAAAAAAAAAATARMRARAQAAAAAAAAAAAAAAAAAAADASAQAAAAAAAAAAAAAAAAAAADATAAEEAwEAAAAAAAAAAAAAAAEAEDAx8BGxYf/aAAwDAQACEQMRAAAB7kHhgCzCgnBP/9oACAEBAAEFAhYUjC3x6f/aAAgBAgABBQKH/9oACAEDAAEFAof/2gAIAQICBj8CH//aAAgBAwIGPwIf/9oACAEBAQY/Ah//2gAIAQEDAT8hVTeSJJaFL2a5v//aAAgBAgMBPyGH/9oACAEDAwE/IYf/2gAMAwEAAhEDEQAAEBBJBB//2gAIAQEDAT8QXV1sRKOD6CgsQDcXG//aAAgBAgMBPxCH/9oACAEDAwE/EIf/2Q==);
+}
+.eapps-preview-background-black-chess {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAIAAAAC64paAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACxJREFUeNpiVFfXYMAN/v3/j0eWiYECMKp5ZGhmIZCGGBlHA2xUMyWaAQIMAJSTBpxFdlboAAAAAElFTkSuQmCC);
+  color: #fff;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-root-layout-component {
+  position: relative;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+.eaec-root-layout-component,
+.eaec-root-layout-component * {
+  box-sizing: border-box !important;
+  outline: none !important;
+}
+.eaec-root-layout-component a {
+  text-decoration: none;
+}
+.eaec-root-layout-component a:hover,
+.eaec-root-layout-component a:focus {
+  text-decoration: underline;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-grid-component {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  overflow: hidden;
+}
+.eaec-grid-item {
+  display: block;
+  box-sizing: border-box;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-grid-component {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-grid-group {
+  margin-bottom: 30px;
+  width: 100%;
+}
+.eaec-grid-group:last-child {
+  margin-bottom: 0;
+}
+.eaec-grid-group:first-child {
+  margin-top: 0;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-date-element-item {
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  color: #111;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-button-component {
+  margin: 28px 0;
+}
+.eaec-button-link {
+  overflow: hidden;
+  box-sizing: border-box;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 0.75em 2.375em;
+  outline: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1;
+  transition-property: border-color, background-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+.eaec-button-styleOutline .eaec-button-link {
+  border: 2px solid;
+}
+.eaec-button-shapeRounded .eaec-button-link {
+  border-radius: 4px;
+}
+.eaec-button-link:hover .eaec-button-text {
+  text-decoration: none !important;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-button-element-component {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+.eaec-button-element-component .eaec-button-component {
+  margin: 0;
+}
+.eaec-button-element-component .eaec-button-link {
+  text-transform: uppercase;
+  height: 36px !important;
+}
+.eaec-button-element-caption {
+  font-size: 14px;
+  color: #111;
+  padding-top: 4px;
+  position: absolute;
+  top: 100%;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-category-component {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+.eaec-category-item {
+  font-size: 15px;
+  color: rgba(17,17,17,0.7);
+  text-transform: uppercase;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+          align-items: center;
+  position: relative;
+}
+.eaec-category-item:before {
+  display: block;
+  content: '';
+  width: 2px;
+  height: calc(100% - 9px);
+  position: absolute;
+  left: 0;
+}
+.eaec-category-past:not(:first-child) {
+  padding-left: 18px;
+}
+.eaec-category-past:not(:first-child):before {
+  display: block;
+  background-color: currentColor;
+  content: '';
+  width: 2px;
+  height: 2px;
+  margin: 0 8px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-date-element-component {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  -webkit-align-self: stretch;
+          align-self: stretch;
+}
+.eaec-date-element-inline {
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.eaec-date-element-start {
+  width: 35px;
+  height: 44px;
+}
+.eaec-date-element-end {
+  position: relative;
+  width: 26px;
+  height: 44px;
+  margin-top: 4px;
+}
+.eaec-date-element-endContainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.eaec-date-element-divider {
+  width: 4px;
+  height: 1px;
+  background-color: #fff;
+  position: relative;
+  top: -3px;
+}
+.eaec-date-element-month {
+  font-size: 13px;
+  line-height: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+.eaec-date-element-end .eaec-date-element-month {
+  font-size: 9px;
+  line-height: 1;
+}
+.eaec-date-element-day {
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 24px;
+  text-align: center;
+  color: #fff;
+}
+.eaec-date-element-end .eaec-date-element-day {
+  font-size: 15px;
+  line-height: 1;
+  margin-top: 0;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-location-component {
+  border-radius: 13px;
+  background-color: rgba(17,17,17,0.06);
+  padding: 4px 16px 4px 7px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+          align-items: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  max-width: 100%;
+}
+.eaec-location-Icon {
+  width: 12px;
+  height: 12px;
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-location-text {
+  margin-left: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 13px;
+}
+.eaec-location-icon {
+  fill: currentColor;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-name-component {
+  font-size: 18px;
+  font-weight: bold;
+  color: currentColor;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-tags-component {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.eaec-tags-item {
+  font-size: 15px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  position: relative;
+}
+.eaec-tags-item:not(:last-child):after {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  background-color: rgba(17,17,17,0.3);
+  border-radius: 50%;
+  position: absolute;
+  right: -11px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-time-component {
+  border-radius: 13px;
+  background-color: rgba(17,17,17,0.06);
+  padding: 4px 16px 4px 7px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+          align-items: center;
+  max-width: 100%;
+}
+.eaec-time-icon {
+  width: 12px;
+  height: 12px;
+  display: -webkit-flex;
+  display: flex;
+  fill: currentColor;
+}
+.eaec-time-text {
+  font-size: 13px;
+  margin-left: 10px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-align-items: flex-end;
+          align-items: flex-end;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.eaec-time-time {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-grid-item-component {
+  background-color: #fafafa;
+  padding: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  cursor: pointer;
+}
+.eaec-grid-item-imageBackground {
+  opacity: 1;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+}
+.eaec-grid-item-imageContainer {
+  overflow: hidden;
+  position: relative;
+  margin-top: -32px;
+  margin-left: -32px;
+  padding-top: 80%;
+  width: calc(100% + 64px);
+  z-index: 2;
+  height: 0;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+}
+.eaec-grid-item-imageContainer:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: linear-gradient(to top, #111 20px, rgba(17,17,17,0));
+  z-index: 2;
+  display: none;
+}
+.eaec-grid-item-imageBackground .eaec-grid-item-imageContainer:before {
+  display: block;
+}
+.eaec-grid-item-imageContainer img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.eaec-grid-item-imageBackground .eaec-grid-item-imageContainer img {
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+}
+.eaec-grid-item-noImage {
+  margin-top: 80px;
+}
+.eaec-grid-item-date {
+  min-width: 75px;
+  min-height: 70px;
+  padding: 12px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  border-radius: 8px 0 8px 0;
+}
+.eaec-grid-item-date .eaec-date-element-start,
+.eaec-grid-item-date .eaec-date-element-end {
+  width: auto;
+  height: auto;
+}
+.eaec-grid-item-date .eaec-date-element-start .eaec-date-element-month {
+  font-size: 13px;
+  line-height: 14px;
+}
+.eaec-grid-item-date .eaec-date-element-start .eaec-date-element-day {
+  font-size: 40px;
+  line-height: 36px;
+}
+.eaec-grid-item-date .eaec-date-element-endContainer {
+  margin-left: 8px;
+  margin-top: -18px;
+}
+.eaec-grid-item-date .eaec-date-element-divider {
+  margin-right: 8px;
+}
+.eaec-grid-item-date .eaec-date-element-end .eaec-date-element-month {
+  font-size: 9px;
+  line-height: 1;
+}
+.eaec-grid-item-date .eaec-date-element-end .eaec-date-element-day {
+  font-size: 24px;
+  line-height: 1;
+}
+.eaec-grid-item-category {
+  margin-top: 20px;
+}
+.eaec-grid-item-imageBackground .eaec-grid-item-category {
+  margin-top: 88px;
+}
+.eaec-grid-item-info {
+  width: 100%;
+  z-index: 3;
+  color: #111;
+  position: relative;
+}
+.eaec-grid-item-info > div:first-child {
+  margin-top: 20px;
+}
+.eaec-grid-item-info > div:last-child {
+  margin-bottom: 0;
+}
+.eaec-grid-item-info > div:first-child:last-child {
+  margin-top: 0;
+}
+.eaec-grid-item-name {
+  margin-top: 4px;
+}
+.eaec-grid-item-tags {
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+  color: #111;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  margin: 0px -10px -10px;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.eaec-grid-item-tags .eaec-tags-item {
+  margin: 2px 10px;
+}
+.eaec-grid-item-location {
+  max-width: 100%;
+  color: #111;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  margin-top: 8px;
+}
+.eaec-grid-item-time {
+  max-width: 100%;
+  color: #111;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  margin-right: 8px;
+}
+.eaec-grid-item-locationAndTime {
+  margin: 20px 0;
+  width: 100%;
+}
+.eaec-grid-item-locationAndTime > div:first-child {
+  margin-top: 0;
+}
+.eaec-grid-item-button {
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  margin: 20px auto 0;
+  width: 100%;
+}
+.eaec-grid-item-button .eaec-button-element-caption {
+  margin-bottom: 4px;
+}
+.eaec-grid-item-button .eaec-button-component {
+  width: 100%;
+}
+.eaec-grid-item-button .eaec-button-link {
+  width: 100%;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-media-image {
+  opacity: 0;
+  transition: 0.3s ease opacity;
+}
+.eaec-media-loaded {
+  opacity: 1;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-navigation-navigation {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.eaec-navigation-arrow {
+  opacity: 1;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-navigation-arrow:hover {
+  opacity: 1;
+  will-change: opacity;
+}
+.eaec-navigation-icon {
+  width: 12px;
+  height: 16px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  transition: 0.2s ease all;
+}
+.eaec-navigation-previous {
+  left: 0;
+}
+.eaec-navigation-previous .eaec-navigation-icon {
+  right: 12px;
+}
+.eaec-navigation-next {
+  right: 0;
+}
+.eaec-navigation-next .eaec-navigation-icon {
+  left: 12px;
+}
+.eaec-navigation-enabled {
+  visibility: visible;
+  pointer-events: all;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-bullets-inner {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  overflow: hidden;
+  width: 80px;
+}
+.eaec-bullets-dots {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-progress-component {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.eaec-progress-circle {
+  transition: stroke-dashoffset 0s;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+.eaec-progress-line {
+  z-index: 1;
+  height: 1px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-bullet-item {
+  display: inline-block;
+  position: relative;
+  transition: 0.3s all ease-out;
+  cursor: pointer;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.eaec-bullet-item:hover .eaec-bullet-dot {
+  transition: 0.1s all ease-out;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+}
+.eaec-bullet-dot {
+  border-radius: 50%;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  width: 8px;
+  min-width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  transition: 0.3s all ease-out;
+  opacity: 0.7;
+}
+.eaec-bullet-active .eaec-bullet-dot {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-numbers-component {
+  display: -webkit-flex;
+  display: flex;
+  width: 48px;
+  height: 48px;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  border-radius: 26px;
+  position: relative;
+  margin: 10px;
+}
+.eaec-numbers-number {
+  font-size: 13px;
+  text-align: center;
+}
+.eaec-numbers-inner {
+  display: -webkit-flex;
+  display: flex;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-lines-component {
+  overflow: hidden;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin: 12px 24px;
+}
+.eaec-lines-inner {
+  display: -webkit-flex;
+  display: flex;
+  margin: 0 -4px;
+  width: 260px;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-line-item {
+  padding: 12px 0;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s all ease;
+  opacity: 0.5;
+}
+.eaec-line-item:hover {
+  opacity: 1;
+}
+.eaec-line-active {
+  opacity: 1;
+}
+.eaec-line-line {
+  width: 44px;
+  margin: 0 4px;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  position: relative;
+  transition: 0.3s all ease;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  height: 2px;
+}
+.eaec-line-progress {
+  width: 0;
+  opacity: 1;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-pagination-component {
+  display: -webkit-flex;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  max-width: 100%;
+  width: 100%;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-slide-slide {
+  display: inline-block;
+  overflow: hidden;
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  box-sizing: border-box;
+}
+.eaec-slide-full-height {
+  height: 100%;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-slider-slider {
+  position: relative;
+  height: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  box-sizing: content-box !important;
+  transition: 0.3s ease all;
+  overflow: hidden;
+}
+.eaec-slider-inner {
+  z-index: 1;
+  position: relative;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+  transition: 0s ease all;
+  will-change: left;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+.eaec-slider-outer {
+  display: block;
+  overflow: hidden;
+  -webkit-transform: translateZ(0px);
+          transform: translateZ(0px);
+}
+.eaec-slider-item {
+  display: inline-block;
+  box-sizing: border-box;
+  transition: 0.3s ease opacity;
+  opacity: 0;
+}
+.eaec-slider-item > div {
+  width: 100%;
+}
+.eaec-slider-active {
+  opacity: 1;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-slider-item-component {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  background-color: #fafafa;
+  border-radius: 8px;
+  margin: 0 10px;
+  overflow: hidden;
+  -webkit-align-items: center;
+          align-items: center;
+  position: relative;
+  max-width: 960px;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.eaec-slider-item-inner {
+  width: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+}
+.eaec-slider-item-imageContainer {
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 50%;
+}
+.eaec-slider-item-imageBackground .eaec-slider-item-imageContainer {
+  position: absolute;
+  width: 66.666666%;
+  padding-top: 0;
+  margin-top: 0;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: auto;
+}
+.eaec-slider-item-imageBackground .eaec-slider-item-imageContainer:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: none;
+}
+.eaec-slider-item-imageBackground .eaec-slider-item-imageContainer {
+  height: 100%;
+}
+.eaec-slider-item-imageBackground .eaec-slider-item-imageContainer:before {
+  display: block;
+}
+.eaec-slider-item-imageContainer img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.eaec-slider-item-imageBackground .eaec-slider-item-imageContainer img {
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+}
+.eaec-slider-item-noImage {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-slider-item-date {
+  min-width: 75px;
+  min-height: 70px;
+  padding: 12px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  border-radius: 8px 0 8px 0;
+}
+.eaec-slider-item-date .eaec-date-element-start,
+.eaec-slider-item-date .eaec-date-element-end {
+  width: auto;
+  height: auto;
+}
+.eaec-slider-item-date .eaec-date-element-start .eaec-date-element-month {
+  font-size: 13px;
+  line-height: 14px;
+}
+.eaec-slider-item-date .eaec-date-element-start .eaec-date-element-day {
+  font-size: 40px;
+  line-height: 36px;
+}
+.eaec-slider-item-date .eaec-date-element-endContainer {
+  margin-left: 8px;
+  margin-top: -18px;
+}
+.eaec-slider-item-date .eaec-date-element-divider {
+  margin-right: 8px;
+}
+.eaec-slider-item-date .eaec-date-element-end .eaec-date-element-month {
+  font-size: 9px;
+  line-height: 1;
+}
+.eaec-slider-item-date .eaec-date-element-end .eaec-date-element-day {
+  font-size: 24px;
+  line-height: 1;
+}
+.eaec-slider-item-category {
+  margin-top: 20px;
+}
+.eaec-slider-item-info {
+  width: 100%;
+  height: 100%;
+  padding: 88px 16px 32px;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+}
+.eaec-slider-item-big .eaec-slider-item-info {
+  padding: 88px 50px 50px;
+  width: 50%;
+}
+.eaec-slider-item-info > div:last-child {
+  margin-bottom: 0;
+}
+.eaec-slider-item-name {
+  margin-top: 4px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #111;
+}
+.eaec-slider-item-big .eaec-slider-item-name {
+  font-size: 36px;
+}
+.eaec-slider-item-tags {
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin: 0px -10px 10px;
+}
+.eaec-slider-item-tags .eaec-tags-item {
+  margin: 2px 10px;
+}
+.eaec-slider-item-location {
+  margin: 0 4px;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+.eaec-slider-item-time {
+  margin: 0 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+.eaec-slider-item-locationAndTime {
+  margin: 8px -4px 0;
+  max-width: 100%;
+}
+.eaec-slider-item-locationAndTime > div:not(:first-child) {
+  margin: 4px;
+}
+.eaec-slider-item-button {
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: auto;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  margin-top: 20px;
+}
+.eaec-slider-item-button .eaec-button-element-caption {
+  margin-bottom: 8px;
+  text-align: left;
+  width: 100%;
+  white-space: nowrap;
+}
+.eaec-slider-item-button .eaec-button-component {
+  width: auto;
+}
+.eaec-slider-item-button .eaec-button-link {
+  width: 100%;
+}
+.eaec-slider-item-mobile .eaec-slider-item-imageContainer {
+  position: static;
+  left: 0;
+  width: 100%;
+}
+.eaec-slider-item-mobile .eaec-button-link {
+  padding: 0.75em;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-slider-component {
+  display: block;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.eaec-slider-component .eaec-slider-outer {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.eaec-slider-pagination {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-slider-item {
+  display: -webkit-flex;
+  display: flex;
+  opacity: 1;
+}
+.eaec-slider-navigation {
+  display: block;
+}
+.eaec-slider-navigation .eaec-slider-navigation-arrow-next:hover {
+  right: -4px;
+}
+.eaec-slider-navigation .eaec-slider-navigation-arrow-prev:hover {
+  left: -4px;
+}
+.eaec-slider-navigation .eaec-slider-navigation-arrow-icon {
+  width: 13px;
+  height: 24px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-arrow-component {
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+}
+.eas-navigation-next .eaec-arrow-component {
+  right: 8px;
+}
+.eas-navigation-previous .eaec-arrow-component {
+  left: 8px;
+}
+.eaec-arrow-preview {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 72px;
+  height: 72px;
+  opacity: 0;
+  transition: 0.3s ease all;
+}
+.eas-navigation-next .eaec-arrow-preview {
+  right: -12px;
+}
+.eas-navigation-previous .eaec-arrow-preview {
+  left: -12px;
+}
+.eas-navigation-previous:hover .eaec-arrow-preview {
+  opacity: 1;
+}
+.eas-navigation-next:hover .eaec-arrow-preview {
+  opacity: 1;
+}
+.eaec-arrow-image {
+  position: absolute;
+  height: 72px;
+  width: 72px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background-size: cover;
+  background-position: center;
+}
+.eas-navigation-previous .eaec-arrow-image {
+  right: 8px;
+}
+.eas-navigation-next .eaec-arrow-image {
+  left: 8px;
+}
+.eaec-arrow-image:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: solid 1px transparent;
+}
+.eaec-arrow-icon {
+  z-index: 3;
+  position: relative;
+  transition: 0.3s ease all;
+  opacity: 1;
+}
+.eas-navigation-previous .eaec-arrow-icon {
+  left: 0;
+}
+.eas-navigation-previous:hover .eaec-arrow-icon {
+  left: -4px;
+}
+.eas-navigation-next .eaec-arrow-icon {
+  right: 0;
+}
+.eas-navigation-next:hover .eaec-arrow-icon {
+  right: -4px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-list-component {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.eaec-list-items {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.eaec-list-item {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 30px;
+}
+.eaec-list-item:last-child {
+  margin-bottom: 0;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-list-item-component {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 10px 0;
+  overflow: hidden;
+  -webkit-align-items: center;
+          align-items: center;
+  cursor: pointer;
+  min-height: 40px;
+}
+.eaec-list-item-component:last-child {
+  margin-bottom: 0;
+}
+.eaec-list-item-component:first-child {
+  margin-top: 0;
+}
+.eaec-list-item-mobile {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.eaec-list-item-date {
+  margin: -20px 24px -20px -20px;
+  width: 75px;
+}
+.eaec-list-item-mobile .eaec-list-item-date {
+  margin: -20px -20px 20px;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  width: auto;
+  -webkit-align-self: flex-start;
+          align-self: flex-start;
+  min-width: 75px;
+  min-height: 70px;
+  padding: 12px;
+}
+.eaec-list-item-fullDate {
+  width: 95px;
+  margin: -20px 24px -20px -14px;
+}
+.eaec-list-item-info {
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.eaec-list-item-mobile .eaec-list-item-info {
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.eaec-list-item-info > div:first-child {
+  margin-left: 0;
+}
+.eaec-list-item-infoContainer {
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+}
+.eaec-list-item-mobile .eaec-list-item-infoContainer {
+  max-width: 100%;
+}
+.eaec-list-item-infoInner {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin-left: 24px;
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+  width: 100%;
+  -webkit-flex-shrink: 1;
+          flex-shrink: 1;
+  overflow: hidden;
+}
+.eaec-list-item-mobile .eaec-list-item-infoInner {
+  margin: 0;
+}
+.eaec-list-item-infoInner div:first-child {
+  margin-top: 0;
+}
+.eaec-list-item-name {
+  margin-top: 4px;
+}
+.eaec-list-item-tags {
+  margin-top: 4px;
+}
+.eaec-list-item-mobile .eaec-list-item-tags {
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+}
+.eaec-list-item-tags .eaec-tags-item {
+  color: rgba(17,17,17,0.7);
+  margin: 2px 10px;
+}
+.eaec-list-item-mobile .eaec-list-item-tags .eaec-tags-item:after {
+  display: none;
+}
+.eaec-list-item-location {
+  margin: 0 4px;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+.eaec-list-item-time {
+  margin: 0 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+.eaec-list-item-locationAndTime {
+  margin: 8px -4px 0;
+  max-width: 100%;
+}
+.eaec-list-item-locationAndTime > div:not(:first-child) {
+  margin: 4px;
+}
+.eaec-list-item-imageContainer {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  margin-left: 24px;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+}
+.eaec-list-item-mobile .eaec-list-item-imageContainer {
+  margin-bottom: 20px;
+  margin-left: 0;
+}
+.eaec-list-item-imageContainer:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: solid 1px rgba(17,17,17,0.1);
+  display: block;
+  border-radius: 8px;
+}
+.eaec-list-item-imageContainer img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.eaec-list-item-button {
+  margin: 8px 0 8px auto;
+}
+.eaec-list-item-mobile .eaec-list-item-button {
+  margin: 20px 0 0 0;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-masonry-masonry {
+  content: '';
+}
+.eaec-masonry-item {
+  content: '';
+}
+.eaec-masonry-sizer {
+  content: '';
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-masonry-item-component {
+  padding: 5px;
+}
+.eaec-masonry-item-inner {
+  background-color: #fafafa;
+  padding: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+  cursor: pointer;
+}
+.eaec-masonry-item-imageBackground {
+  opacity: 1;
+}
+.eaec-masonry-item-imageContainer {
+  overflow: hidden;
+  position: relative;
+  margin-top: -32px;
+  margin-left: -32px;
+  width: calc(100% + 64px);
+  z-index: 2;
+  margin-bottom: auto;
+}
+.eaec-masonry-item-imageContainer:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: linear-gradient(to top, #111 20px, rgba(17,17,17,0));
+  z-index: 2;
+  display: none;
+}
+.eaec-masonry-item-imageBackground .eaec-masonry-item-imageContainer:before {
+  display: block;
+}
+.eaec-masonry-item-imageContainer img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  top: 0;
+  left: 0;
+}
+.eaec-masonry-item-imageBackground .eaec-masonry-item-imageContainer img {
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+}
+.eaec-masonry-item-noImage {
+  margin-top: 80px;
+}
+.eaec-masonry-item-date {
+  min-width: 75px;
+  min-height: 70px;
+  padding: 12px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  border-radius: 8px 0 8px 0;
+}
+.eaec-masonry-item-date .eaec-date-element-start,
+.eaec-masonry-item-date .eaec-date-element-end {
+  width: auto;
+  height: auto;
+}
+.eaec-masonry-item-date .eaec-date-element-start .eaec-date-element-month {
+  font-size: 13px;
+  line-height: 14px;
+}
+.eaec-masonry-item-date .eaec-date-element-start .eaec-date-element-day {
+  font-size: 40px;
+  line-height: 36px;
+}
+.eaec-masonry-item-date .eaec-date-element-endContainer {
+  margin-left: 8px;
+  margin-top: -18px;
+}
+.eaec-masonry-item-date .eaec-date-element-divider {
+  margin-right: 8px;
+}
+.eaec-masonry-item-date .eaec-date-element-end .eaec-date-element-month {
+  font-size: 9px;
+  line-height: 1;
+}
+.eaec-masonry-item-date .eaec-date-element-end .eaec-date-element-day {
+  font-size: 24px;
+  line-height: 1;
+}
+.eaec-masonry-item-category {
+  margin-top: 20px;
+}
+.eaec-masonry-item-imageBackground .eaec-masonry-item-category {
+  margin-top: 88px;
+}
+.eaec-masonry-item-info {
+  width: 100%;
+  z-index: 3;
+  color: #fff;
+  position: relative;
+}
+.eaec-masonry-item-info > div:first-child {
+  margin-top: 20px;
+}
+.eaec-masonry-item-info > div:last-child {
+  margin-bottom: 0;
+}
+.eaec-masonry-item-info > div:first-child:last-child {
+  margin-top: 0;
+}
+.eaec-masonry-item-name {
+  margin-top: 4px;
+}
+.eaec-masonry-item-tags {
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+  color: #111;
+  margin: 0px -10px -10px;
+}
+.eaec-masonry-item-tags .eaec-tags-item {
+  margin: 2px 10px;
+}
+.eaec-masonry-item-location {
+  max-width: 100%;
+  color: #111;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  margin-top: 8px;
+}
+.eaec-masonry-item-time {
+  max-width: 100%;
+  color: #111;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  margin-right: 8px;
+}
+.eaec-masonry-item-locationAndTime {
+  margin: 20px 0;
+  width: 100%;
+}
+.eaec-masonry-item-locationAndTime > div:first-child {
+  margin-top: 0;
+}
+.eaec-masonry-item-button {
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  margin: 20px auto 0;
+  width: 100%;
+}
+.eaec-masonry-item-button .eaec-button-element-caption {
+  margin-bottom: 4px;
+}
+.eaec-masonry-item-button .eaec-button-component {
+  width: 100%;
+}
+.eaec-masonry-item-button .eaec-button-link {
+  width: 100%;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-masonry-masonryOuter {
+  display: inherit;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-layout-pastEvents {
+  margin-top: 32px;
+}
+.eaec-layout-pastEventsTitle {
+  margin-bottom: 20px;
+  text-align: left;
+  font-weight: bold;
+}
+
+
+
+
+    </style>
+    <style type="text/css">
+/* classes attached to <body> */
+
+.fc-not-allowed,
+.fc-not-allowed .fc-event { /* override events' custom cursors */
+  cursor: not-allowed;
+}
+
+.fc-unselectable {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.fc {
+  /* layout of immediate children */
+  display: flex;
+  flex-direction: column;
+
+  font-size: 1em
+}
+.fc,
+  .fc *,
+  .fc *:before,
+  .fc *:after {
+    box-sizing: border-box;
+  }
+.fc table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1em; /* normalize cross-browser */
+  }
+.fc th {
+    text-align: center;
+  }
+.fc th,
+  .fc td {
+    vertical-align: top;
+    padding: 0;
+  }
+.fc a[data-navlink] {
+    cursor: pointer;
+  }
+.fc a[data-navlink]:hover {
+    text-decoration: underline;
+  }
+.fc-direction-ltr {
+  direction: ltr;
+  text-align: left;
+}
+.fc-direction-rtl {
+  direction: rtl;
+  text-align: right;
+}
+.fc-theme-standard td,
+  .fc-theme-standard th {
+    border: 1px solid #ddd;
+    border: 1px solid var(--fc-border-color, #ddd);
+  }
+/* for FF, which doesn't expand a 100% div within a table cell. use absolute positioning */
+/* inner-wrappers are responsible for being absolute */
+/* TODO: best place for this? */
+.fc-liquid-hack td,
+  .fc-liquid-hack th {
+    position: relative;
+  }
+
+@font-face {
+  font-family: 'fcicons';
+  src: url("data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg8SBfAAAAC8AAAAYGNtYXAXVtKNAAABHAAAAFRnYXNwAAAAEAAAAXAAAAAIZ2x5ZgYydxIAAAF4AAAFNGhlYWQUJ7cIAAAGrAAAADZoaGVhB20DzAAABuQAAAAkaG10eCIABhQAAAcIAAAALGxvY2ED4AU6AAAHNAAAABhtYXhwAA8AjAAAB0wAAAAgbmFtZXsr690AAAdsAAABhnBvc3QAAwAAAAAI9AAAACAAAwPAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADpBgPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAADAAAAAwAAABwAAQADAAAAHAADAAEAAAAcAAQAOAAAAAoACAACAAIAAQAg6Qb//f//AAAAAAAg6QD//f//AAH/4xcEAAMAAQAAAAAAAAAAAAAAAQAB//8ADwABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABAWIAjQKeAskAEwAAJSc3NjQnJiIHAQYUFwEWMjc2NCcCnuLiDQ0MJAz/AA0NAQAMJAwNDcni4gwjDQwM/wANIwz/AA0NDCMNAAAAAQFiAI0CngLJABMAACUBNjQnASYiBwYUHwEHBhQXFjI3AZ4BAA0N/wAMJAwNDeLiDQ0MJAyNAQAMIw0BAAwMDSMM4uINIwwNDQAAAAIA4gC3Ax4CngATACcAACUnNzY0JyYiDwEGFB8BFjI3NjQnISc3NjQnJiIPAQYUHwEWMjc2NCcB87e3DQ0MIw3VDQ3VDSMMDQ0BK7e3DQ0MJAzVDQ3VDCQMDQ3zuLcMJAwNDdUNIwzWDAwNIwy4twwkDA0N1Q0jDNYMDA0jDAAAAgDiALcDHgKeABMAJwAAJTc2NC8BJiIHBhQfAQcGFBcWMjchNzY0LwEmIgcGFB8BBwYUFxYyNwJJ1Q0N1Q0jDA0Nt7cNDQwjDf7V1Q0N1QwkDA0Nt7cNDQwkDLfWDCMN1Q0NDCQMt7gMIw0MDNYMIw3VDQ0MJAy3uAwjDQwMAAADAFUAAAOrA1UAMwBoAHcAABMiBgcOAQcOAQcOARURFBYXHgEXHgEXHgEzITI2Nz4BNz4BNz4BNRE0JicuAScuAScuASMFITIWFx4BFx4BFx4BFREUBgcOAQcOAQcOASMhIiYnLgEnLgEnLgE1ETQ2Nz4BNz4BNz4BMxMhMjY1NCYjISIGFRQWM9UNGAwLFQkJDgUFBQUFBQ4JCRULDBgNAlYNGAwLFQkJDgUFBQUFBQ4JCRULDBgN/aoCVgQIBAQHAwMFAQIBAQIBBQMDBwQECAT9qgQIBAQHAwMFAQIBAQIBBQMDBwQECASAAVYRGRkR/qoRGRkRA1UFBAUOCQkVDAsZDf2rDRkLDBUJCA4FBQUFBQUOCQgVDAsZDQJVDRkLDBUJCQ4FBAVVAgECBQMCBwQECAX9qwQJAwQHAwMFAQICAgIBBQMDBwQDCQQCVQUIBAQHAgMFAgEC/oAZEhEZGRESGQAAAAADAFUAAAOrA1UAMwBoAIkAABMiBgcOAQcOAQcOARURFBYXHgEXHgEXHgEzITI2Nz4BNz4BNz4BNRE0JicuAScuAScuASMFITIWFx4BFx4BFx4BFREUBgcOAQcOAQcOASMhIiYnLgEnLgEnLgE1ETQ2Nz4BNz4BNz4BMxMzFRQWMzI2PQEzMjY1NCYrATU0JiMiBh0BIyIGFRQWM9UNGAwLFQkJDgUFBQUFBQ4JCRULDBgNAlYNGAwLFQkJDgUFBQUFBQ4JCRULDBgN/aoCVgQIBAQHAwMFAQIBAQIBBQMDBwQECAT9qgQIBAQHAwMFAQIBAQIBBQMDBwQECASAgBkSEhmAERkZEYAZEhIZgBEZGREDVQUEBQ4JCRUMCxkN/asNGQsMFQkIDgUFBQUFBQ4JCBUMCxkNAlUNGQsMFQkJDgUEBVUCAQIFAwIHBAQIBf2rBAkDBAcDAwUBAgICAgEFAwMHBAMJBAJVBQgEBAcCAwUCAQL+gIASGRkSgBkSERmAEhkZEoAZERIZAAABAOIAjQMeAskAIAAAExcHBhQXFjI/ARcWMjc2NC8BNzY0JyYiDwEnJiIHBhQX4uLiDQ0MJAzi4gwkDA0N4uINDQwkDOLiDCQMDQ0CjeLiDSMMDQ3h4Q0NDCMN4uIMIw0MDOLiDAwNIwwAAAABAAAAAQAAa5n0y18PPPUACwQAAAAAANivOVsAAAAA2K85WwAAAAADqwNVAAAACAACAAAAAAAAAAEAAAPA/8AAAAQAAAAAAAOrAAEAAAAAAAAAAAAAAAAAAAALBAAAAAAAAAAAAAAAAgAAAAQAAWIEAAFiBAAA4gQAAOIEAABVBAAAVQQAAOIAAAAAAAoAFAAeAEQAagCqAOoBngJkApoAAQAAAAsAigADAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA4ArgABAAAAAAABAAcAAAABAAAAAAACAAcAYAABAAAAAAADAAcANgABAAAAAAAEAAcAdQABAAAAAAAFAAsAFQABAAAAAAAGAAcASwABAAAAAAAKABoAigADAAEECQABAA4ABwADAAEECQACAA4AZwADAAEECQADAA4APQADAAEECQAEAA4AfAADAAEECQAFABYAIAADAAEECQAGAA4AUgADAAEECQAKADQApGZjaWNvbnMAZgBjAGkAYwBvAG4Ac1ZlcnNpb24gMS4wAFYAZQByAHMAaQBvAG4AIAAxAC4AMGZjaWNvbnMAZgBjAGkAYwBvAG4Ac2ZjaWNvbnMAZgBjAGkAYwBvAG4Ac1JlZ3VsYXIAUgBlAGcAdQBsAGEAcmZjaWNvbnMAZgBjAGkAYwBvAG4Ac0ZvbnQgZ2VuZXJhdGVkIGJ5IEljb01vb24uAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fc-icon {
+  /* added for fc */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'fcicons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fc-icon-chevron-left:before {
+  content: "\e900";
+}
+
+.fc-icon-chevron-right:before {
+  content: "\e901";
+}
+
+.fc-icon-chevrons-left:before {
+  content: "\e902";
+}
+
+.fc-icon-chevrons-right:before {
+  content: "\e903";
+}
+
+.fc-icon-minus-square:before {
+  content: "\e904";
+}
+
+.fc-icon-plus-square:before {
+  content: "\e905";
+}
+
+.fc-icon-x:before {
+  content: "\e906";
+}
+/*
+Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
+
+These styles only apply when the standard-theme is activated.
+When it's NOT activated, the fc-button classes won't even be in the DOM.
+*/
+.fc {
+
+  /* reset */
+
+}
+.fc .fc-button {
+    border-radius: 0;
+    overflow: visible;
+    text-transform: none;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+.fc .fc-button:focus {
+    outline: 1px dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+.fc .fc-button {
+    -webkit-appearance: button;
+  }
+.fc .fc-button:not(:disabled) {
+    cursor: pointer;
+  }
+.fc .fc-button::-moz-focus-inner {
+    padding: 0;
+    border-style: none;
+  }
+.fc {
+
+  /* theme */
+
+}
+.fc .fc-button {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.4em 0.65em;
+    font-size: 1em;
+    line-height: 1.5;
+    border-radius: 0.25em;
+  }
+.fc .fc-button:hover {
+    text-decoration: none;
+  }
+.fc .fc-button:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+  }
+.fc .fc-button:disabled {
+    opacity: 0.65;
+  }
+.fc {
+
+  /* "primary" coloring */
+
+}
+.fc .fc-button-primary {
+    color: #fff;
+    color: var(--fc-button-text-color, #fff);
+    background-color: #2C3E50;
+    background-color: var(--fc-button-bg-color, #2C3E50);
+    border-color: #2C3E50;
+    border-color: var(--fc-button-border-color, #2C3E50);
+  }
+.fc .fc-button-primary:hover {
+    color: #fff;
+    color: var(--fc-button-text-color, #fff);
+    background-color: #1e2b37;
+    background-color: var(--fc-button-hover-bg-color, #1e2b37);
+    border-color: #1a252f;
+    border-color: var(--fc-button-hover-border-color, #1a252f);
+  }
+.fc .fc-button-primary:disabled { /* not DRY */
+    color: #fff;
+    color: var(--fc-button-text-color, #fff);
+    background-color: #2C3E50;
+    background-color: var(--fc-button-bg-color, #2C3E50);
+    border-color: #2C3E50;
+    border-color: var(--fc-button-border-color, #2C3E50); /* overrides :hover */
+  }
+.fc .fc-button-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
+  }
+.fc .fc-button-primary:not(:disabled):active,
+  .fc .fc-button-primary:not(:disabled).fc-button-active {
+    color: #fff;
+    color: var(--fc-button-text-color, #fff);
+    background-color: #1a252f;
+    background-color: var(--fc-button-active-bg-color, #1a252f);
+    border-color: #151e27;
+    border-color: var(--fc-button-active-border-color, #151e27);
+  }
+.fc .fc-button-primary:not(:disabled):active:focus,
+  .fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+    box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
+  }
+.fc {
+
+  /* icons within buttons */
+
+}
+.fc .fc-button .fc-icon {
+    vertical-align: middle;
+    font-size: 1.5em; /* bump up the size (but don't make it bigger than line-height of button, which is 1.5em also) */
+  }
+.fc .fc-button-group {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+  }
+.fc .fc-button-group > .fc-button {
+    position: relative;
+    flex: 1 1 auto;
+  }
+.fc .fc-button-group > .fc-button:hover {
+    z-index: 1;
+  }
+.fc .fc-button-group > .fc-button:focus,
+  .fc .fc-button-group > .fc-button:active,
+  .fc .fc-button-group > .fc-button.fc-button-active {
+    z-index: 1;
+  }
+.fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+.fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+.fc-direction-rtl .fc-button-group > .fc-button:not(:first-child) {
+    margin-right: -1px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+.fc-direction-rtl .fc-button-group > .fc-button:not(:last-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+.fc .fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 1.5em;
+  }
+.fc .fc-toolbar.fc-footer-toolbar {
+    margin-top: 1.5em;
+  }
+.fc .fc-toolbar-title {
+    font-size: 1.75em;
+    margin: 0;
+  }
+.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+    margin-left: .75em; /* space between */
+  }
+.fc-direction-rtl .fc-toolbar > * > :not(:first-child) {
+    margin-right: .75em; /* space between */
+  }
+.fc-direction-rtl .fc-toolbar-ltr { /* when the toolbar-chunk positioning system is explicitly left-to-right */
+    flex-direction: row-reverse;
+  }
+.fc .fc-scroller {
+    -webkit-overflow-scrolling: touch;
+    position: relative; /* for abs-positioned elements within */
+  }
+.fc .fc-scroller-liquid {
+    height: 100%;
+  }
+.fc .fc-scroller-liquid-absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+.fc .fc-scroller-harness {
+    position: relative;
+    overflow: hidden;
+    direction: ltr;
+      /* hack for chrome computing the scroller's right/left wrong for rtl. undone below... */
+      /* TODO: demonstrate in codepen */
+  }
+.fc .fc-scroller-harness-liquid {
+    height: 100%;
+  }
+.fc-direction-rtl .fc-scroller-harness > .fc-scroller { /* undo above hack */
+    direction: rtl;
+  }
+.fc-theme-standard .fc-scrollgrid {
+    border: 1px solid #ddd;
+    border: 1px solid var(--fc-border-color, #ddd); /* bootstrap does this. match */
+  }
+.fc .fc-scrollgrid,
+    .fc .fc-scrollgrid table { /* all tables (self included) */
+      width: 100%; /* because tables don't normally do this */
+      table-layout: fixed;
+    }
+.fc .fc-scrollgrid table { /* inner tables */
+      border-top-style: hidden;
+      border-left-style: hidden;
+      border-right-style: hidden;
+    }
+.fc .fc-scrollgrid {
+
+    border-collapse: separate;
+    border-right-width: 0;
+    border-bottom-width: 0;
+
+  }
+.fc .fc-scrollgrid-liquid {
+    height: 100%;
+  }
+.fc .fc-scrollgrid-section { /* a <tr> */
+    height: 1px /* better than 0, for firefox */
+
+  }
+.fc .fc-scrollgrid-section > td {
+      height: 1px; /* needs a height so inner div within grow. better than 0, for firefox */
+    }
+.fc .fc-scrollgrid-section table {
+      height: 1px;
+        /* for most browsers, if a height isn't set on the table, can't do liquid-height within cells */
+        /* serves as a min-height. harmless */
+    }
+.fc .fc-scrollgrid-section-liquid {
+    height: auto
+
+  }
+.fc .fc-scrollgrid-section-liquid > td {
+      height: 100%; /* better than `auto`, for firefox */
+    }
+.fc .fc-scrollgrid-section > * {
+    border-top-width: 0;
+    border-left-width: 0;
+  }
+.fc .fc-scrollgrid-section-header > *,
+  .fc .fc-scrollgrid-section-footer > * {
+    border-bottom-width: 0;
+  }
+.fc .fc-scrollgrid-section-body table,
+  .fc .fc-scrollgrid-section-footer table {
+    border-bottom-style: hidden; /* head keeps its bottom border tho */
+  }
+.fc {
+
+  /* stickiness */
+
+}
+.fc .fc-scrollgrid-section-sticky > * {
+    background: #fff;
+    background: var(--fc-page-bg-color, #fff);
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 2; /* TODO: var */
+    /* TODO: box-shadow when sticking */
+  }
+.fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky > * {
+    top: 0; /* because border-sharing causes a gap at the top */
+      /* TODO: give safari -1. has bug */
+  }
+.fc .fc-scrollgrid-section-footer.fc-scrollgrid-section-sticky > * {
+    bottom: 0; /* known bug: bottom-stickiness doesn't work in safari */
+  }
+.fc .fc-scrollgrid-sticky-shim { /* for horizontal scrollbar */
+    height: 1px; /* needs height to create scrollbars */
+    margin-bottom: -1px;
+  }
+.fc-sticky { /* no .fc wrap because used as child of body */
+  position: -webkit-sticky;
+  position: sticky;
+}
+.fc .fc-view-harness {
+    flex-grow: 1; /* because this harness is WITHIN the .fc's flexbox */
+    position: relative;
+  }
+.fc {
+
+  /* when the harness controls the height, make the view liquid */
+
+}
+.fc .fc-view-harness-active > .fc-view {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+.fc .fc-col-header-cell-cushion {
+    display: inline-block; /* x-browser for when sticky (when multi-tier header) */
+    padding: 2px 4px;
+  }
+.fc .fc-bg-event,
+  .fc .fc-non-business,
+  .fc .fc-highlight {
+    /* will always have a harness with position:relative/absolute, so absolutely expand */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+.fc .fc-non-business {
+    background: rgba(215, 215, 215, 0.3);
+    background: var(--fc-non-business-color, rgba(215, 215, 215, 0.3));
+  }
+.fc .fc-bg-event {
+    background: rgb(143, 223, 130);
+    background: var(--fc-bg-event-color, rgb(143, 223, 130));
+    opacity: 0.3;
+    opacity: var(--fc-bg-event-opacity, 0.3)
+  }
+.fc .fc-bg-event .fc-event-title {
+      margin: .5em;
+      font-size: .85em;
+      font-size: var(--fc-small-font-size, .85em);
+      font-style: italic;
+    }
+.fc .fc-highlight {
+    background: rgba(188, 232, 241, 0.3);
+    background: var(--fc-highlight-color, rgba(188, 232, 241, 0.3));
+  }
+.fc .fc-cell-shaded,
+  .fc .fc-day-disabled {
+    background: rgba(208, 208, 208, 0.3);
+    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));
+  }
+/* link resets */
+/* ---------------------------------------------------------------------------------------------------- */
+a.fc-event,
+a.fc-event:hover {
+  text-decoration: none;
+}
+/* cursor */
+.fc-event[href],
+.fc-event.fc-event-draggable {
+  cursor: pointer;
+}
+/* event text content */
+/* ---------------------------------------------------------------------------------------------------- */
+.fc-event .fc-event-main {
+    position: relative;
+    z-index: 2;
+  }
+/* dragging */
+/* ---------------------------------------------------------------------------------------------------- */
+.fc-event-dragging:not(.fc-event-selected) { /* MOUSE */
+    opacity: 0.75;
+  }
+.fc-event-dragging.fc-event-selected { /* TOUCH */
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  }
+/* resizing */
+/* ---------------------------------------------------------------------------------------------------- */
+/* (subclasses should hone positioning for touch and non-touch) */
+.fc-event .fc-event-resizer {
+    display: none;
+    position: absolute;
+    z-index: 4;
+  }
+.fc-event:hover, /* MOUSE */
+.fc-event-selected { /* TOUCH */
+
+}
+.fc-event:hover .fc-event-resizer, .fc-event-selected .fc-event-resizer {
+    display: block;
+  }
+.fc-event-selected .fc-event-resizer {
+    border-radius: 4px;
+    border-radius: calc(var(--fc-event-resizer-dot-total-width, 8px) / 2);
+    border-width: 1px;
+    border-width: var(--fc-event-resizer-dot-border-width, 1px);
+    width: 8px;
+    width: var(--fc-event-resizer-dot-total-width, 8px);
+    height: 8px;
+    height: var(--fc-event-resizer-dot-total-width, 8px);
+    border-style: solid;
+    border-color: inherit;
+    background: #fff;
+    background: var(--fc-page-bg-color, #fff)
+
+    /* expand hit area */
+
+  }
+.fc-event-selected .fc-event-resizer:before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+    }
+/* selecting (always TOUCH) */
+/* ---------------------------------------------------------------------------------------------------- */
+.fc-event-selected {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+
+  /* expand hit area (subclasses should expand) */
+
+}
+.fc-event-selected:before {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+.fc-event-selected {
+
+  /* dimmer effect */
+
+}
+.fc-event-selected:after {
+    content: "";
+    background: rgba(0, 0, 0, 0.25);
+    background: var(--fc-event-selected-overlay-color, rgba(0, 0, 0, 0.25));
+    position: absolute;
+    z-index: 1;
+
+    /* assume there's a border on all sides. overcome it. */
+    /* sometimes there's NOT a border, in which case the dimmer will go over */
+    /* an adjacent border, which looks fine. */
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+  }
+/*
+A HORIZONTAL event
+*/
+.fc-h-event { /* allowed to be top-level */
+  display: block;
+  border: 1px solid #3788d8;
+  border: 1px solid var(--fc-event-border-color, #3788d8);
+  background-color: #3788d8;
+  background-color: var(--fc-event-bg-color, #3788d8)
+
+}
+.fc-h-event .fc-event-main {
+    color: #fff;
+    color: var(--fc-event-text-color, #fff);
+  }
+.fc-h-event .fc-event-main-frame {
+    display: flex; /* for make fc-event-title-container expand */
+  }
+.fc-h-event .fc-event-time {
+    max-width: 100%; /* clip overflow on this element */
+    overflow: hidden;
+  }
+.fc-h-event .fc-event-title-container { /* serves as a container for the sticky cushion */
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0; /* important for allowing to shrink all the way */
+  }
+.fc-h-event .fc-event-title {
+    display: inline-block; /* need this to be sticky cross-browser */
+    vertical-align: top; /* for not messing up line-height */
+    left: 0;  /* for sticky */
+    right: 0; /* for sticky */
+    max-width: 100%; /* clip overflow on this element */
+    overflow: hidden;
+  }
+.fc-h-event.fc-event-selected:before {
+    /* expand hit area */
+    top: -10px;
+    bottom: -10px;
+  }
+/* adjust border and border-radius (if there is any) for non-start/end */
+.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-start),
+.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-end) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 0;
+}
+.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end),
+.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-start) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right-width: 0;
+}
+/* resizers */
+.fc-h-event:not(.fc-event-selected) .fc-event-resizer {
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  width: var(--fc-event-resizer-thickness, 8px);
+}
+.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start,
+.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end {
+  cursor: w-resize;
+  left: -4px;
+  left: calc(var(--fc-event-resizer-thickness, 8px) / -2);
+}
+.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end,
+.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start {
+  cursor: e-resize;
+  right: -4px;
+  right: calc(var(--fc-event-resizer-thickness, 8px) / -2);
+}
+/* resizers for TOUCH */
+.fc-h-event.fc-event-selected .fc-event-resizer {
+  top: 50%;
+  margin-top: -4px;
+  margin-top: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
+}
+.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-start,
+.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-end {
+  left: -4px;
+  left: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
+}
+.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-end,
+.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-start {
+  right: -4px;
+  right: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
+}
+
+
+
+
+    </style>
+    <style type="text/css">
+:root {
+  --fc-daygrid-event-dot-width: 8px;
+}
+.fc .fc-popover {
+    position: fixed;
+    top: 0; /* for when not positioned yet */
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  }
+.fc .fc-popover-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 4px;
+  }
+.fc .fc-popover-title {
+    margin: 0 2px;
+  }
+.fc .fc-popover-close {
+    cursor: pointer;
+    opacity: 0.65;
+    font-size: 1.1em;
+  }
+.fc-theme-standard .fc-popover {
+    border: 1px solid #ddd;
+    border: 1px solid var(--fc-border-color, #ddd);
+    background: #fff;
+    background: var(--fc-page-bg-color, #fff);
+  }
+.fc-theme-standard .fc-popover-header {
+    background: rgba(208, 208, 208, 0.3);
+    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));
+  }
+/* help things clear margins of inner content */
+.fc-daygrid-day-frame,
+.fc-daygrid-day-events,
+.fc-daygrid-event-harness { /* for event top/bottom margins */
+}
+.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {
+  content: "";
+  clear: both;
+  display: table; }
+.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {
+  content: "";
+  clear: both;
+  display: table; }
+.fc .fc-daygrid-body { /* a <div> that wraps the table */
+    position: relative;
+    z-index: 1; /* container inner z-index's because <tr>s can't do it */
+  }
+.fc .fc-daygrid-day.fc-day-today {
+      background-color: rgba(255, 220, 40, 0.15);
+      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));
+    }
+.fc .fc-daygrid-day-frame {
+    position: relative;
+    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */
+  }
+.fc {
+
+  /* cell top */
+
+}
+.fc .fc-daygrid-day-top {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+.fc .fc-day-other .fc-daygrid-day-top {
+    opacity: 0.3;
+  }
+.fc {
+
+  /* day number (within cell top) */
+
+}
+.fc .fc-daygrid-day-number {
+    position: relative;
+    z-index: 4;
+    padding: 4px;
+  }
+.fc {
+
+  /* event container */
+
+}
+.fc .fc-daygrid-day-events {
+    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */
+  }
+.fc {
+
+  /* positioning for balanced vs natural */
+
+}
+.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+      position: relative; /* for containing abs positioned event harnesses */
+      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */
+    }
+.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */
+  }
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+      margin-bottom: 1em;
+    }
+.fc {
+
+  /* event harness */
+
+}
+.fc .fc-daygrid-event-harness {
+    position: relative;
+  }
+.fc .fc-daygrid-event-harness-abs {
+    position: absolute;
+    top: 0; /* fallback coords for when cannot yet be computed */
+    left: 0; /* */
+    right: 0; /* */
+  }
+.fc .fc-daygrid-bg-harness {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+.fc {
+
+  /* bg content */
+
+}
+.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1 }
+.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2 }
+.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3 }
+.fc {
+
+  /* events */
+
+}
+.fc .fc-daygrid-event {
+    z-index: 6;
+    margin-top: 1px;
+  }
+.fc .fc-daygrid-event.fc-event-mirror {
+    z-index: 7;
+  }
+.fc {
+
+  /* cell bottom (within day-events) */
+
+}
+.fc .fc-daygrid-day-bottom {
+    font-size: .85em;
+    margin: 2px 3px 0;
+  }
+.fc .fc-daygrid-more-link {
+    position: relative;
+    z-index: 4;
+    cursor: pointer;
+  }
+.fc {
+
+  /* week number (within frame) */
+
+}
+.fc .fc-daygrid-week-number {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    padding: 2px;
+    min-width: 1.5em;
+    text-align: center;
+    background-color: rgba(208, 208, 208, 0.3);
+    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));
+    color: #808080;
+    color: var(--fc-neutral-text-color, #808080);
+  }
+.fc {
+
+  /* popover */
+
+}
+.fc .fc-more-popover {
+    z-index: 8;
+  }
+.fc .fc-more-popover .fc-popover-body {
+    min-width: 220px;
+    padding: 10px;
+  }
+.fc-direction-ltr .fc-daygrid-event.fc-event-start,
+.fc-direction-rtl .fc-daygrid-event.fc-event-end {
+  margin-left: 2px;
+}
+.fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
+  margin-right: 2px;
+}
+.fc-direction-ltr .fc-daygrid-week-number {
+    left: 0;
+    border-radius: 0 0 3px 0;
+  }
+.fc-direction-rtl .fc-daygrid-week-number {
+    right: 0;
+    border-radius: 0 0 0 3px;
+  }
+.fc-liquid-hack .fc-daygrid-day-frame {
+    position: static; /* will cause inner absolute stuff to expand to <td> */
+  }
+.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */
+  position: relative; /* for z-indexes assigned later */
+  white-space: nowrap;
+  border-radius: 3px; /* dot event needs this to when selected */
+  font-size: .85em;
+  font-size: var(--fc-small-font-size, .85em);
+}
+/* --- the rectangle ("block") style of event --- */
+.fc-daygrid-block-event .fc-event-time {
+    font-weight: bold;
+  }
+.fc-daygrid-block-event .fc-event-time,
+  .fc-daygrid-block-event .fc-event-title {
+    padding: 1px;
+  }
+/* --- the dot style of event --- */
+.fc-daygrid-dot-event {
+  display: flex;
+  align-items: center;
+  padding: 2px 0
+
+}
+.fc-daygrid-dot-event .fc-event-title {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0; /* important for allowing to shrink all the way */
+    overflow: hidden;
+    font-weight: bold;
+  }
+.fc-daygrid-dot-event:hover,
+  .fc-daygrid-dot-event.fc-event-mirror {
+    background: rgba(0, 0, 0, 0.1);
+  }
+.fc-daygrid-dot-event.fc-event-selected:before {
+    /* expand hit area */
+    top: -10px;
+    bottom: -10px;
+  }
+.fc-daygrid-event-dot { /* the actual dot */
+  margin: 0 4px;
+  box-sizing: content-box;
+  width: 0;
+  height: 0;
+  border: 4px solid #3788d8;
+  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);
+  border-radius: 4px;
+  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);
+}
+/* --- spacing between time and title --- */
+.fc-direction-ltr .fc-daygrid-event .fc-event-time {
+    margin-right: 3px;
+  }
+.fc-direction-rtl .fc-daygrid-event .fc-event-time {
+    margin-left: 3px;
+  }
+
+
+
+
+    </style>
+    <style type="text/css">
+/*
+A VERTICAL event
+*/
+
+.fc-v-event { /* allowed to be top-level */
+  display: block;
+  border: 1px solid #3788d8;
+  border: 1px solid var(--fc-event-border-color, #3788d8);
+  background-color: #3788d8;
+  background-color: var(--fc-event-bg-color, #3788d8)
+
+}
+
+.fc-v-event .fc-event-main {
+    color: #fff;
+    color: var(--fc-event-text-color, #fff);
+    height: 100%;
+  }
+
+.fc-v-event .fc-event-main-frame {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+.fc-v-event .fc-event-time {
+    flex-grow: 0;
+    flex-shrink: 0;
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+.fc-v-event .fc-event-title-container { /* a container for the sticky cushion */
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-height: 0; /* important for allowing to shrink all the way */
+  }
+
+.fc-v-event .fc-event-title { /* will have fc-sticky on it */
+    top: 0;
+    bottom: 0;
+    max-height: 100%; /* clip overflow */
+    overflow: hidden;
+  }
+
+.fc-v-event:not(.fc-event-start) {
+    border-top-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+.fc-v-event:not(.fc-event-end) {
+    border-bottom-width: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+.fc-v-event.fc-event-selected:before {
+    /* expand hit area */
+    left: -10px;
+    right: -10px;
+  }
+
+.fc-v-event {
+
+  /* resizer (mouse AND touch) */
+
+}
+
+.fc-v-event .fc-event-resizer-start {
+    cursor: n-resize;
+  }
+
+.fc-v-event .fc-event-resizer-end {
+    cursor: s-resize;
+  }
+
+.fc-v-event {
+
+  /* resizer for MOUSE */
+
+}
+
+.fc-v-event:not(.fc-event-selected) .fc-event-resizer {
+      height: 8px;
+      height: var(--fc-event-resizer-thickness, 8px);
+      left: 0;
+      right: 0;
+    }
+
+.fc-v-event:not(.fc-event-selected) .fc-event-resizer-start {
+      top: -4px;
+      top: calc(var(--fc-event-resizer-thickness, 8px) / -2);
+    }
+
+.fc-v-event:not(.fc-event-selected) .fc-event-resizer-end {
+      bottom: -4px;
+      bottom: calc(var(--fc-event-resizer-thickness, 8px) / -2);
+    }
+
+.fc-v-event {
+
+  /* resizer for TOUCH (when event is "selected") */
+
+}
+
+.fc-v-event.fc-event-selected .fc-event-resizer {
+      left: 50%;
+      margin-left: -4px;
+      margin-left: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
+    }
+
+.fc-v-event.fc-event-selected .fc-event-resizer-start {
+      top: -4px;
+      top: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
+    }
+
+.fc-v-event.fc-event-selected .fc-event-resizer-end {
+      bottom: -4px;
+      bottom: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
+    }
+.fc .fc-timegrid .fc-daygrid-body { /* the all-day daygrid within the timegrid view */
+    z-index: 2; /* put above the timegrid-body so that more-popover is above everything. TODO: better solution */
+  }
+.fc .fc-timegrid-divider {
+    padding: 0 0 2px; /* browsers get confused when you set height. use padding instead */
+  }
+.fc .fc-timegrid-body {
+    position: relative;
+    z-index: 1; /* scope the z-indexes of slots and cols */
+    min-height: 100%; /* fill height always, even when slat table doesn't grow */
+  }
+.fc .fc-timegrid-axis-chunk { /* for advanced ScrollGrid */
+    position: relative /* offset parent for now-indicator-container */
+
+  }
+.fc .fc-timegrid-axis-chunk > table {
+      position: relative;
+      z-index: 1; /* above the now-indicator-container */
+    }
+.fc .fc-timegrid-slots {
+    position: relative;
+    z-index: 1;
+  }
+.fc .fc-timegrid-slot { /* a <td> */
+    height: 1.5em;
+    border-bottom: 0 /* each cell owns its top border */
+  }
+.fc .fc-timegrid-slot:empty:before {
+      content: '\00a0'; /* make sure there's at least an empty space to create height for height syncing */
+    }
+.fc .fc-timegrid-slot-minor {
+    border-top-style: dotted;
+  }
+.fc .fc-timegrid-slot-label-cushion {
+    display: inline-block;
+    white-space: nowrap;
+  }
+.fc .fc-timegrid-slot-label {
+    vertical-align: middle; /* vertical align the slots */
+  }
+.fc {
+
+
+  /* slots AND axis cells (top-left corner of view including the "all-day" text) */
+
+}
+.fc .fc-timegrid-axis-cushion,
+  .fc .fc-timegrid-slot-label-cushion {
+    padding: 0 4px;
+  }
+.fc {
+
+
+  /* axis cells (top-left corner of view including the "all-day" text) */
+  /* vertical align is more complicated, uses flexbox */
+
+}
+.fc .fc-timegrid-axis-frame-liquid {
+    height: 100%; /* will need liquid-hack in FF */
+  }
+.fc .fc-timegrid-axis-frame {
+    overflow: hidden;
+    display: flex;
+    align-items: center; /* vertical align */
+    justify-content: flex-end; /* horizontal align. matches text-align below */
+  }
+.fc .fc-timegrid-axis-cushion {
+    max-width: 60px; /* limits the width of the "all-day" text */
+    flex-shrink: 0; /* allows text to expand how it normally would, regardless of constrained width */
+  }
+.fc-direction-ltr .fc-timegrid-slot-label-frame {
+    text-align: right;
+  }
+.fc-direction-rtl .fc-timegrid-slot-label-frame {
+    text-align: left;
+  }
+.fc-liquid-hack .fc-timegrid-axis-frame-liquid {
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  }
+.fc .fc-timegrid-col.fc-day-today {
+      background-color: rgba(255, 220, 40, 0.15);
+      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));
+    }
+.fc .fc-timegrid-col-frame {
+    min-height: 100%; /* liquid-hack is below */
+    position: relative;
+  }
+.fc-liquid-hack .fc-timegrid-col-frame {
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  }
+.fc-media-screen .fc-timegrid-cols {
+    position: absolute; /* no z-index. children will decide and go above slots */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0
+  }
+.fc-media-screen .fc-timegrid-cols > table {
+      height: 100%;
+    }
+.fc-media-screen .fc-timegrid-col-bg,
+  .fc-media-screen .fc-timegrid-col-events,
+  .fc-media-screen .fc-timegrid-now-indicator-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+.fc-media-screen .fc-timegrid-event-harness {
+    position: absolute; /* top/left/right/bottom will all be set by JS */
+  }
+.fc {
+
+  /* bg */
+
+}
+.fc .fc-timegrid-col-bg {
+    z-index: 2; /* TODO: kill */
+  }
+.fc .fc-timegrid-col-bg .fc-non-business { z-index: 1 }
+.fc .fc-timegrid-col-bg .fc-bg-event { z-index: 2 }
+.fc .fc-timegrid-col-bg .fc-highlight { z-index: 3 }
+.fc .fc-timegrid-bg-harness {
+    position: absolute; /* top/bottom will be set by JS */
+    left: 0;
+    right: 0;
+  }
+.fc {
+
+  /* fg events */
+  /* (the mirror segs are put into a separate container with same classname, */
+  /* and they must be after the normal seg container to appear at a higher z-index) */
+
+}
+.fc .fc-timegrid-col-events {
+    z-index: 3;
+    /* child event segs have z-indexes that are scoped within this div */
+  }
+.fc {
+
+  /* now indicator */
+
+}
+.fc .fc-timegrid-now-indicator-container {
+    bottom: 0;
+    overflow: hidden; /* don't let overflow of lines/arrows cause unnecessary scrolling */
+    /* z-index is set on the individual elements */
+  }
+.fc-direction-ltr .fc-timegrid-col-events {
+    margin: 0 2.5% 0 2px;
+  }
+.fc-direction-rtl .fc-timegrid-col-events {
+    margin: 0 2px 0 2.5%;
+  }
+.fc-timegrid-event-harness-inset .fc-timegrid-event,
+.fc-timegrid-event.fc-event-mirror {
+  box-shadow: 0px 0px 0px 1px #fff;
+  box-shadow: 0px 0px 0px 1px var(--fc-page-bg-color, #fff);
+}
+.fc-timegrid-event { /* events need to be root */
+
+  font-size: .85em;
+
+  font-size: var(--fc-small-font-size, .85em);
+  border-radius: 3px
+
+}
+.fc-timegrid-event .fc-event-main {
+    padding: 1px 1px 0;
+  }
+.fc-timegrid-event .fc-event-time {
+    white-space: nowrap;
+    font-size: .85em;
+    font-size: var(--fc-small-font-size, .85em);
+    margin-bottom: 1px;
+  }
+.fc-timegrid-event-condensed .fc-event-main-frame {
+    flex-direction: row;
+    overflow: hidden;
+  }
+.fc-timegrid-event-condensed .fc-event-time:after {
+    content: '\00a0-\00a0'; /* dash surrounded by non-breaking spaces */
+  }
+.fc-timegrid-event-condensed .fc-event-title {
+    font-size: .85em;
+    font-size: var(--fc-small-font-size, .85em)
+  }
+.fc-media-screen .fc-timegrid-event {
+    position: absolute; /* absolute WITHIN the harness */
+    top: 0;
+    bottom: 1px; /* stay away from bottom slot line */
+    left: 0;
+    right: 0;
+  }
+.fc {
+
+  /* line */
+
+}
+.fc .fc-timegrid-now-indicator-line {
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    right: 0;
+    border-style: solid;
+    border-color: red;
+    border-color: var(--fc-now-indicator-color, red);
+    border-width: 1px 0 0;
+  }
+.fc {
+
+  /* arrow */
+
+}
+.fc .fc-timegrid-now-indicator-arrow {
+    position: absolute;
+    z-index: 4;
+    margin-top: -5px; /* vertically center on top coordinate */
+    border-style: solid;
+    border-color: red;
+    border-color: var(--fc-now-indicator-color, red);
+  }
+.fc-direction-ltr .fc-timegrid-now-indicator-arrow {
+    left: 0;
+
+    /* triangle pointing right. TODO: mixin */
+    border-width: 5px 0 5px 6px;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+  }
+.fc-direction-rtl .fc-timegrid-now-indicator-arrow {
+    right: 0;
+
+    /* triangle pointing left. TODO: mixin */
+    border-width: 5px 6px 5px 0;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+  }
+
+
+
+
+    </style>
+    <style type="text/css">
+:root {
+  --fc-list-event-dot-width: 10px;
+  --fc-list-event-hover-bg-color: #f5f5f5;
+}
+.fc-theme-standard .fc-list {
+    border: 1px solid #ddd;
+    border: 1px solid var(--fc-border-color, #ddd);
+  }
+.fc {
+
+  /* message when no events */
+
+}
+.fc .fc-list-empty {
+    background-color: rgba(208, 208, 208, 0.3);
+    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* vertically aligns fc-list-empty-inner */
+  }
+.fc .fc-list-empty-cushion {
+    margin: 5em 0;
+  }
+.fc {
+
+  /* table within the scroller */
+  /* ---------------------------------------------------------------------------------------------------- */
+
+}
+.fc .fc-list-table {
+    width: 100%;
+    border-style: hidden; /* kill outer border on theme */
+  }
+.fc .fc-list-table tr > * {
+    border-left: 0;
+    border-right: 0;
+  }
+.fc .fc-list-sticky .fc-list-day > * { /* the cells */
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      background: #fff;
+      background: var(--fc-page-bg-color, #fff); /* for when headers are styled to be transparent and sticky */
+    }
+.fc .fc-list-table th {
+    padding: 0; /* uses an inner-wrapper instead... */
+  }
+.fc .fc-list-table td,
+  .fc .fc-list-day-cushion {
+    padding: 8px 14px;
+  }
+.fc {
+
+
+  /* date heading rows */
+  /* ---------------------------------------------------------------------------------------------------- */
+
+}
+.fc .fc-list-day-cushion:after {
+  content: "";
+  clear: both;
+  display: table; /* clear floating */
+    }
+.fc-theme-standard .fc-list-day-cushion {
+    background-color: rgba(208, 208, 208, 0.3);
+    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));
+  }
+.fc-direction-ltr .fc-list-day-text,
+.fc-direction-rtl .fc-list-day-side-text {
+  float: left;
+}
+.fc-direction-ltr .fc-list-day-side-text,
+.fc-direction-rtl .fc-list-day-text {
+  float: right;
+}
+/* make the dot closer to the event title */
+.fc-direction-ltr .fc-list-table .fc-list-event-graphic { padding-right: 0 }
+.fc-direction-rtl .fc-list-table .fc-list-event-graphic { padding-left: 0 }
+.fc .fc-list-event.fc-event-forced-url {
+    cursor: pointer; /* whole row will seem clickable */
+  }
+.fc .fc-list-event:hover td {
+    background-color: #f5f5f5;
+    background-color: var(--fc-list-event-hover-bg-color, #f5f5f5);
+  }
+.fc {
+
+  /* shrink certain cols */
+
+}
+.fc .fc-list-event-graphic,
+  .fc .fc-list-event-time {
+    white-space: nowrap;
+    width: 1px;
+  }
+.fc .fc-list-event-dot {
+    display: inline-block;
+    box-sizing: content-box;
+    width: 0;
+    height: 0;
+    border: 5px solid #3788d8;
+    border: calc(var(--fc-list-event-dot-width, 10px) / 2) solid var(--fc-event-border-color, #3788d8);
+    border-radius: 5px;
+    border-radius: calc(var(--fc-list-event-dot-width, 10px) / 2);
+  }
+.fc {
+
+  /* reset <a> styling */
+
+}
+.fc .fc-list-event-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+.fc {
+
+  /* underline link when hovering over any part of row */
+
+}
+.fc .fc-list-event.fc-event-forced-url:hover a {
+    text-decoration: underline;
+  }
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-modal-overlay-component {
+  opacity: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.2s ease;
+  transition-delay: 0.15s;
+}
+.eaec-modal-overlay-component-transition-entered {
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-read-more-content {
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease all;
+}
+.eaec-read-more-content:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 20%, rgba(255,255,255,0) 100%);
+  display: block;
+  position: absolute;
+  transition: 0.3s ease all;
+  opacity: 0;
+  pointer-events: none;
+}
+.eaec-read-more-clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: inherit;
+  font-size: inherit;
+}
+.eaec-read-more-button {
+  cursor: pointer;
+  display: block;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-organizer-component .eaec-organizer-content {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-organizer-title {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  font-size: 15px;
+  font-weight: bold;
+  color: #111;
+  -webkit-align-items: center;
+          align-items: center;
+  text-transform: uppercase;
+}
+.eaec-organizer-titleText {
+  margin-left: 8px;
+}
+.eaec-organizer-titleIcon {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-organizer-content {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #111;
+}
+.eaec-organizer-name {
+  font-size: 15px;
+  color: #111;
+}
+.eaec-organizer-contacts {
+  margin-top: 8px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.eaec-organizer-contacts a {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.eaec-organizer-contacts a:hover {
+  text-decoration: underline;
+}
+.eaec-organizer-contacts a:not(:first-child):before {
+  content: '';
+  display: inline-block;
+  margin: 0 8px;
+  width: 3px;
+  height: 3px;
+  background-color: rgba(17,17,17,0.3);
+  border-radius: 50%;
+}
+.eaec-organizer-phone {
+  color: #1c91ff;
+  text-decoration: none;
+}
+.eaec-organizer-email {
+  color: #1c91ff;
+  text-decoration: none;
+}
+.eaec-organizer-site {
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 4px;
+  color: #1c91ff;
+  text-decoration: none;
+}
+.eaec-organizer-site:hover {
+  text-decoration: underline;
+}
+.eaec-organizer-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.eaec-organizer-imageContainer {
+  margin-left: auto;
+  width: 74px;
+  height: 74px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: -30px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-divider-component {
+  margin: 40px 0;
+  width: 100%;
+  background-color: rgba(17,17,17,0.1);
+  height: 1px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-popup-location-component {
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+.eaec-popup-location-title {
+  font-size: 15px;
+  color: #111;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  font-weight: bold;
+  -webkit-align-items: center;
+          align-items: center;
+  text-transform: uppercase;
+}
+.eaec-popup-location-titleText {
+  margin-left: 8px;
+}
+.eaec-popup-location-icon {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-popup-location-content {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #111;
+}
+.eaec-popup-location-link {
+  display: inline-block;
+  font-size: 15px;
+  line-height: 18px;
+  color: #1c91ff;
+  text-decoration: none;
+}
+.eaec-popup-location-link:hover {
+  text-decoration: underline;
+}
+.eaec-popup-location-location {
+  margin-bottom: 8px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-drop-down-component {
+  display: inline-block;
+  position: relative;
+}
+.eaec-drop-down-trigger {
+  font-size: 15px;
+  line-height: 18px;
+  color: #1c91ff;
+  cursor: pointer;
+}
+.eaec-drop-down-trigger:hover {
+  text-decoration: underline;
+}
+.eaec-drop-down-modal {
+  position: absolute;
+  top: 100%;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  width: 170px;
+  background-color: #fff;
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+  transition: 0.3s ease all;
+  margin-top: 8px;
+  border-radius: 8px;
+  padding: 12px 0;
+  z-index: 1000;
+}
+.eaec-drop-down-show {
+  opacity: 1;
+  pointer-events: all;
+  visibility: visible;
+}
+.eaec-drop-down-item {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 7px 16px;
+  font-size: 15px;
+  line-height: 20px;
+  color: #111;
+  transition: 0.3s ease all;
+  top: 0;
+  position: relative;
+  cursor: pointer;
+  height: 35px;
+  box-sizing: border-box;
+}
+.eaec-drop-down-item:hover {
+  background-color: rgba(17,17,17,0.06);
+}
+.eaec-drop-down-item a {
+  color: #111;
+  text-decoration: none;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding-left: 16px;
+  box-sizing: border-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 35px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-popup-time-component {
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+.eaec-popup-time-title {
+  font-size: 15px;
+  color: #111;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  font-weight: bold;
+  -webkit-align-items: center;
+          align-items: center;
+  text-transform: uppercase;
+}
+.eaec-popup-time-titleText {
+  margin-left: 8px;
+}
+.eaec-popup-time-icon {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-popup-time-content {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #111;
+}
+.eaec-popup-time-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 18px;
+  color: #1c91ff;
+  text-decoration: none;
+}
+.eaec-popup-time-link:hover {
+  text-decoration: underline;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-share-title {
+  font-size: 15px;
+  color: #111;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  font-weight: bold;
+  -webkit-align-items: center;
+          align-items: center;
+  text-transform: uppercase;
+}
+.eaec-share-titleText {
+  margin-left: 8px;
+}
+.eaec-share-icon {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-share-content {
+  font-size: 15px;
+  color: #111;
+  margin: 12px -10px 0;
+  display: -webkit-flex;
+  display: flex;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-share-link-button {
+  width: 50%;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  margin: 0 10px;
+  border: 1px solid rgba(17,17,17,0.12);
+  border-radius: 4px;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  top: 0;
+  transition: 0.3s ease all;
+  position: relative;
+}
+.eaec-share-link-button:hover {
+  top: -4px;
+}
+.eaec-share-link-icon {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-share-link-text {
+  margin-left: 8px;
+  font-size: 13px;
+  text-align: center;
+  color: #111;
+  text-transform: uppercase;
+}
+.eaec-share-link-copied {
+  position: absolute;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: 0.3s ease all;
+  overflow: hidden;
+}
+.eaec-share-link-copiedText {
+  bottom: 100%;
+  position: relative;
+  font-size: 13px;
+  color: #111;
+}
+.eaec-share-link-show .eaec-share-link-copiedText {
+  -webkit-animation: eaec-share-link-show-text 2s linear;
+          animation: eaec-share-link-show-text 2s linear;
+}
+.eaec-share-link-show {
+  opacity: 1;
+}
+@-webkit-keyframes eaec-share-link-show-text {
+  0% {
+    bottom: 100%;
+  }
+  10% {
+    bottom: 0;
+  }
+  20% {
+    bottom: 0;
+  }
+  90% {
+    bottom: 0;
+  }
+  99% {
+    bottom: -100%;
+  }
+}
+@keyframes eaec-share-link-show-text {
+  0% {
+    bottom: 100%;
+  }
+  10% {
+    bottom: 0;
+  }
+  20% {
+    bottom: 0;
+  }
+  90% {
+    bottom: 0;
+  }
+  99% {
+    bottom: -100%;
+  }
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-share-email-button {
+  width: 50%;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  margin: 0 10px;
+  border: 1px solid rgba(17,17,17,0.12);
+  border-radius: 4px;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  transition: 0.3s ease all;
+  text-decoration: none;
+}
+.eaec-share-email-button:hover {
+  top: -4px;
+}
+.eaec-share-email-icon {
+  display: -webkit-flex;
+  display: flex;
+}
+.eaec-share-email-text {
+  margin-left: 8px;
+  font-size: 13px;
+  text-align: center;
+  color: #111;
+  text-transform: uppercase;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-close-component {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(17,17,17,0.3);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  cursor: pointer;
+  transition: 0.3s ease all;
+  position: relative;
+}
+.eaec-close-icon {
+  fill: #fff;
+}
+.eaec-close-link {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-popup-item-inner {
+  max-width: 800px;
+  width: 100%;
+  padding: 40px 80px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+.eaec-popup-item-mobile .eaec-popup-item-inner {
+  padding: 20px;
+}
+.eaec-popup-item-mobile .eaec-popup-item-inner .eaec-share-content {
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.eaec-popup-item-mobile .eaec-popup-item-inner .eaec-share-link-button {
+  width: auto;
+}
+.eaec-popup-item-mobile .eaec-popup-item-inner .eaec-share-email-button {
+  width: auto;
+  margin-top: 12px;
+}
+.eaec-popup-item-mobile .eaec-popup-item-inner .eaec-organizer-contacts {
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+  margin-top: 12px;
+}
+.eaec-popup-item-mobile .eaec-popup-item-inner .eaec-organizer-email {
+  margin-top: 4px;
+}
+.eaec-popup-item-mobile .eaec-popup-item-inner .eaec-organizer-email:before {
+  display: none;
+}
+.eaec-popup-item-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.eaec-popup-item-row {
+  width: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  margin: 40px 0;
+}
+.eaec-popup-item-mobile .eaec-popup-item-row {
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.eaec-popup-item-category {
+  text-align: center;
+}
+.eaec-popup-item-header {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.eaec-popup-item-name {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 12px;
+}
+.eaec-popup-item-date {
+  margin-top: 12px;
+}
+.eaec-popup-item-button {
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  margin: 20px auto 0;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+.eaec-popup-item-button .eaec-button-element-caption {
+  margin-bottom: 4px;
+  text-align: center;
+}
+.eaec-popup-item-button .eaec-button-component {
+  width: 100%;
+}
+.eaec-popup-item-button .eaec-button-link {
+  width: 100%;
+}
+.eaec-popup-item-media {
+  margin: 40px -80px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.eaec-popup-item-mobile .eaec-popup-item-media {
+  margin: 20px -20px;
+}
+.eaec-popup-item-media iframe {
+  width: 100%;
+  height: 480px;
+}
+.eaec-popup-item-media img {
+  max-width: 100%;
+}
+.eaec-popup-item-time {
+  width: 50%;
+  display: inline-block;
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+}
+.eaec-popup-item-mobile .eaec-popup-item-time {
+  width: 100%;
+}
+.eaec-popup-item-location {
+  width: 50%;
+  display: inline-block;
+}
+.eaec-popup-item-mobile .eaec-popup-item-location {
+  width: 100%;
+  margin-left: -20px;
+  margin-top: 20px;
+}
+.eaec-popup-item-tags {
+  font-weight: bold;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  margin: 0px -10px -10px;
+}
+.eaec-popup-item-mobile .eaec-popup-item-tags {
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.eaec-popup-item-tags .eaec-tags-item {
+  margin: 2px 10px;
+}
+.eaec-popup-item-mobile .eaec-popup-item-tags .eaec-tags-item:after {
+  display: none;
+}
+.eaec-popup-item-description {
+  font-size: 15px;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.eaec-popup-item-readMoreButton {
+  overflow: hidden;
+  transition: 0.3s ease all;
+  opacity: 1;
+  display: block;
+}
+.eaec-popup-item-blockTitle {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-align-items: center;
+          align-items: center;
+  text-transform: uppercase;
+}
+.eaec-popup-item-blockTitleText {
+  margin-left: 8px;
+}
+.eaec-popup-item-blockTitleContent {
+  margin-top: 12px;
+  font-size: 15px;
+}
+.eaec-popup-item-mapContainer {
+  margin: 40px -80px;
+}
+.eaec-popup-item-mobile .eaec-popup-item-mapContainer {
+  margin: 20px -20px;
+}
+.eaec-popup-item-overlay {
+  cursor: default;
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.eaec-popup-item-pastEvent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 18px;
+  line-height: 18px;
+  padding: 10px 20px;
+  border-radius: 12px 0 12px 0;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-event-viewer-modal {
+  transition: 0.3s ease all;
+  pointer-events: all !important;
+}
+.eaec-event-viewer-modalContent {
+  -webkit-align-self: flex-start;
+          align-self: flex-start;
+  margin-top: 200px;
+  transition: 0.3s ease all;
+  opacity: 0;
+  margin-bottom: 100px;
+  position: static;
+  position: initial;
+}
+.enter-done .eaec-event-viewer-modalContent {
+  margin-top: 100px;
+  opacity: 1;
+}
+.enter-done .eaec-event-viewer-mobile {
+  margin-top: 0;
+}
+.eaec-event-viewer-container {
+  position: relative;
+  z-index: 2;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  -webkit-overflow-scrolling: touch;
+}
+.eaec-event-viewer-container.eaec-event-viewer-container-enter-done {
+  opacity: 1;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-calendar-component .fc-toolbar-chunk:first-child {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.eaec-calendar-component .fc-toolbar-chunk:first-child h2 {
+  font-size: 16px;
+  display: inline-block;
+  font-weight: bold;
+}
+.eaec-calendar-component .fc-icon-chevron-right,
+.eaec-calendar-component .fc-icon-chevron-left {
+  height: 100%;
+  line-height: 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.eaec-calendar-component .fc-scrollgrid-section > * {
+  background: none !important;
+}
+.eaec-calendar-component .fc-prev-button,
+.eaec-calendar-component .fc-next-button,
+.eaec-calendar-component .fc-prev-button:hover,
+.eaec-calendar-component .fc-next-button:hover {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background-color: #f5f5f5 !important;
+  border: none !important;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.eaec-calendar-component .fc-icon {
+  color: #111;
+}
+.eaec-calendar-component .fc-today-button {
+  height: 32px;
+  border-radius: 4px;
+  background-color: #f5f5f5 !important;
+  font-size: 13px;
+  color: #111 !important;
+  border: none !important;
+  text-transform: uppercase;
+  outline: none !important;
+  box-shadow: none !important;
+  opacity: 1;
+  transition: 0.2s ease all;
+}
+.eaec-calendar-component .fc-today-button:disabled {
+  opacity: 0;
+}
+.eaec-calendar-component .fc-header-toolbar {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.eaec-calendar-component .eaec-controls-component {
+  margin-top: 0;
+}
+.eaec-calendar-component .fc-col-header-cell {
+  font-weight: bold;
+  color: #111;
+  text-align: left;
+  padding: 4px 12px;
+}
+.eaec-calendar-component .fc-daygrid-day {
+  height: auto;
+}
+.eaec-calendar-component .fc-daygrid-day-frame {
+  min-height: unset;
+}
+.eaec-calendar-component .fc-event-main-frame {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.eaec-calendar-component .fc-event-time {
+  width: 100%;
+  opacity: 0.7;
+}
+.eaec-calendar-component .fc-h-event .fc-event-time {
+  -webkit-order: 2;
+          order: 2;
+}
+.eaec-calendar-component .fc-daygrid-dot-event .fc-event-time {
+  padding: 4px;
+}
+.eaec-calendar-component .fc-daygrid-event-dot {
+  display: none;
+}
+.eaec-calendar-component .fc-event-title {
+  text-overflow: ellipsis;
+  font-weight: normal;
+}
+.eaec-calendar-component .fc-daygrid-event-harness-abs .fc-daygrid-event.fc-event-start {
+  margin-right: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right-width: 0 !important;
+}
+.eaec-calendar-component .fc-daygrid-event-harness-abs .fc-daygrid-event.fc-event-end {
+  margin-left: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-left-width: 0 !important;
+}
+.eaec-calendar-component .fc-daygrid-event-harness-abs .fc-daygrid-event:not(.fc-event-start):not(.fc-event-end) {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right-width: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-left-width: 0 !important;
+}
+.eaec-calendar-component .fc-daygrid-event,
+.eaec-calendar-component .fc-daygrid-event-harness-abs .fc-daygrid-event.fc-event-start.fc-event-end {
+  margin: 4px 8px !important;
+}
+.eaec-calendar-component .fc-event-main {
+  padding: 8px;
+}
+.eaec-calendar-component .fc-daygrid-event {
+  border: none !important;
+  background-color: #0f4c82;
+  transition: 0.2s ease all;
+}
+.eaec-calendar-component .fc-daygrid-event:hover {
+  cursor: pointer;
+}
+.eaec-calendar-component .fc-daygrid-event.hovered {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.eaec-calendar-component .fc-daygrid-day-top {
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  padding: 12px 0 0 12px;
+}
+.eaec-calendar-component .fc-daygrid-day-top a {
+  opacity: 0.7;
+  color: #111;
+  text-decoration: none !important;
+}
+.eaec-calendar-component .fc-day-other a {
+  opacity: 1;
+}
+.eaec-calendar-component .fc-day a {
+  cursor: auto;
+  text-decoration: none !important;
+}
+.eaec-calendar-component .fc-header-toolbar {
+  margin-bottom: 0 !important;
+}
+.eaec-calendar-component .fc-toolbar-chunk,
+.eaec-calendar-component .eaec-controls-component {
+  margin-bottom: 24px;
+}
+.eaec-calendar-component .fc-toolbar-title {
+  min-width: 176px;
+  text-align: center;
+  margin: 0 !important;
+}
+.eaec-calendar-component .fc-daygrid table {
+  border: 0 !important;
+}
+.eaec-calendar-component .fc-daygrid td,
+.eaec-calendar-component .fc-daygrid th {
+  border: 0 !important;
+  box-shadow: inset 0 0 0.5px 0.5px #000 !important;
+}
+.eaec-calendar-component .fc-col-header th {
+  box-shadow: inset 0 0.5px 0.5px 0.5px #000 !important;
+}
+.eaec-calendar-mobile .eaec-controls-component {
+  margin-bottom: 24px;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.eaec-calendar-mobile .eaec-filter-component {
+  margin: 5px;
+}
+.eaec-calendar-mobile .fc-event-title {
+  font-size: 10px;
+}
+.eaec-calendar-mobile .fc-event-main {
+  padding: 9px 6px;
+}
+.eaec-calendar-mobile .fc-daygrid-event,
+.eaec-calendar-mobile .fc-daygrid-event-harness-abs .fc-daygrid-event.fc-event-start.fc-event-end {
+  margin: 2px 4px !important;
+}
+.eaec-calendar-mobile .fc-col-header-cell-cushion {
+  font-size: 0;
+}
+.eaec-calendar-mobile .fc-col-header-cell-cushion:first-letter {
+  font-size: 16px;
+}
+.eaec-calendar-mobile th .fc-scrollgrid-sync-inner {
+  text-align: center;
+}
+.eaec-calendar-mobile .fc-daygrid-day-top {
+  -webkit-justify-content: center;
+          justify-content: center;
+  padding: 12px 0 0;
+}
+.eaec-calendar-mobile .fc-toolbar-chunk,
+.eaec-calendar-mobile .eaec-controls-component {
+  margin-bottom: 20px;
+}
+.eaec-calendar-mobile .fc-toolbar {
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-weekly-calendar-component .fc-toolbar-chunk:first-child {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.eaec-weekly-calendar-component .fc-toolbar-chunk:first-child h2 {
+  font-size: 16px;
+  display: inline-block;
+  font-weight: bold;
+}
+.eaec-weekly-calendar-component .fc-icon-chevron-right,
+.eaec-weekly-calendar-component .fc-icon-chevron-left {
+  height: 100%;
+  line-height: 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.eaec-weekly-calendar-component .fc-scrollgrid-section > * {
+  background: none !important;
+}
+.eaec-weekly-calendar-component .fc-prev-button,
+.eaec-weekly-calendar-component .fc-next-button,
+.eaec-weekly-calendar-component .fc-prev-button:hover,
+.eaec-weekly-calendar-component .fc-next-button:hover {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background-color: #f5f5f5 !important;
+  border: none !important;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.eaec-weekly-calendar-component .fc-icon {
+  color: #111;
+}
+.eaec-weekly-calendar-component .fc-today-button {
+  height: 32px;
+  border-radius: 4px;
+  background-color: #f5f5f5 !important;
+  font-size: 13px;
+  color: #111 !important;
+  border: none !important;
+  text-transform: uppercase;
+  outline: none !important;
+  box-shadow: none !important;
+  opacity: 1;
+  transition: 0.2s ease all;
+  width: auto;
+}
+.eaec-weekly-calendar-component .fc-today-button:disabled {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+.eaec-weekly-calendar-component .fc-col-header-cell {
+  font-weight: bold;
+  color: #111;
+  text-align: center;
+  padding: 4px 12px;
+}
+.eaec-weekly-calendar-component .fc-event-title-container {
+  -webkit-flex-grow: 0;
+          flex-grow: 0;
+  width: 100%;
+}
+.eaec-weekly-calendar-component .fc-event-main-frame {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  overflow: hidden;
+}
+.eaec-weekly-calendar-component .fc-event-time {
+  width: 100%;
+  opacity: 0.7;
+}
+.eaec-weekly-calendar-component .fc-event-time {
+  -webkit-order: 2;
+          order: 2;
+}
+.eaec-weekly-calendar-component .fc-timegrid-dot-event .fc-event-time {
+  padding: 4px;
+}
+.eaec-weekly-calendar-component .fc-timegrid-event-dot {
+  display: none;
+}
+.eaec-weekly-calendar-component .fc-event-title {
+  text-overflow: ellipsis;
+  font-weight: normal;
+  white-space: nowrap;
+}
+.eaec-weekly-calendar-component .fc-timegrid-col-events .fc-timegrid-event.fc-event-start {
+  margin-bottom: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-width: 0 !important;
+}
+.eaec-weekly-calendar-component .fc-timegrid-col-events .fc-timegrid-event.fc-event-end {
+  margin-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-top-width: 0 !important;
+}
+.eaec-weekly-calendar-component .fc-timegrid-col-events .fc-event-future:not(.fc-event-start):not(.fc-event-end) {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right-width: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-left-width: 0 !important;
+}
+.eaec-weekly-calendar-component .fc-timegrid-event,
+.eaec-weekly-calendar-component .fc-timegrid-event-harness-abs .fc-timegrid-event.fc-event-start.fc-event-end {
+  margin: 0 4px !important;
+}
+.eaec-weekly-calendar-component .fc-event-main {
+  padding: 6px;
+}
+.eaec-weekly-calendar-component .fc-timegrid-event {
+  border: none !important;
+  background-color: #0f4c82;
+  transition: 0.2s ease all;
+}
+.eaec-weekly-calendar-component .fc-timegrid-event:hover {
+  cursor: pointer;
+}
+.eaec-weekly-calendar-component .fc-timegrid-event.hovered {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.eaec-weekly-calendar-component .fc-timegrid-day-top {
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  padding: 12px 0 0 12px;
+}
+.eaec-weekly-calendar-component .fc-timegrid-day-top a {
+  opacity: 0.7;
+  color: #111;
+  text-decoration: none !important;
+}
+.eaec-weekly-calendar-component .fc-day-other a {
+  opacity: 1;
+}
+.eaec-weekly-calendar-component .fc-day a {
+  cursor: auto;
+  text-decoration: none !important;
+}
+.eaec-weekly-calendar-component .fc-header-toolbar {
+  margin-bottom: 0 !important;
+}
+.eaec-weekly-calendar-component .fc-toolbar-chunk,
+.eaec-weekly-calendar-component .eaec-controls-component {
+  margin-bottom: 24px;
+}
+.eaec-weekly-calendar-component .fc-toolbar-title {
+  min-width: 176px;
+  text-align: center;
+}
+.eaec-weekly-calendar-component .fc-timegrid-now-indicator-arrow {
+  display: none;
+}
+.eaec-weekly-calendar-component .fc-timegrid-now-indicator-line:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  margin: auto;
+  border-radius: 50%;
+  margin-top: -4px;
+  margin-left: -4px;
+}
+.eaec-weekly-calendar-component .fc-timegrid-now-indicator-container {
+  overflow: visible;
+  overflow: initial;
+}
+.eaec-weekly-calendar-component .fc-timegrid-slot-label[data-time="00:00:00"] {
+  display: none;
+}
+.eaec-weekly-calendar-component .fc .fc-timegrid-slot-minor,
+.eaec-weekly-calendar-component .fc-theme-standard .fc-timegrid-slot {
+  border: none;
+}
+.eaec-weekly-calendar-component .fc .fc-timegrid-slot-label {
+  position: relative;
+}
+.eaec-weekly-calendar-component .fc-timegrid-slot-label-cushion {
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-transform: uppercase;
+  color: #111;
+  padding-right: 7px;
+}
+.eaec-weekly-calendar-component .fc-timegrid-slots tr:nth-child(1) td {
+  border-top: 0;
+}
+.eaec-weekly-calendar-component .fc-timegrid-slots tr:nth-child(2n) td:nth-child(2) {
+  border-bottom: 1px dashed #ddd;
+  position: relative;
+}
+.eaec-weekly-calendar-component .fc-timegrid-slots tr:nth-child(8n) td:nth-child(2) {
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+.eaec-weekly-calendar-component .fc-timegrid-slots tr:nth-child(2n) td:nth-child(2)::after,
+.eaec-weekly-calendar-component .fc-timegrid-slots tr:nth-child(8n) td:nth-child(2)::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 1px;
+  position: absolute;
+  bottom: -1px;
+  left: -5px;
+  border-bottom: 1px solid #111;
+}
+.eaec-weekly-calendar-component .fc-timegrid-slots tr:last-child td:nth-child(2) {
+  border-bottom: none;
+}
+.eaec-weekly-calendar-component .fc-timegrid-col {
+  border-top: none;
+}
+.eaec-weekly-calendar-component .fc-day-past {
+  border-right: 0;
+}
+.eaec-weekly-calendar-component .fc-col-header tr th:last-child,
+.eaec-weekly-calendar-component .fc-timegrid-cols tr td:last-child {
+  border-right: none;
+}
+.eaec-weekly-calendar-mobile .eaec-controls-component {
+  margin-bottom: 24px;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.eaec-weekly-calendar-mobile .eaec-filter-component {
+  margin: 5px;
+}
+.eaec-weekly-calendar-mobile .fc-event-title {
+  font-size: 10px;
+}
+.eaec-weekly-calendar-mobile .fc-event-main {
+  padding: 9px 6px;
+}
+.eaec-weekly-calendar-mobile .fc-timegrid-event,
+.eaec-weekly-calendar-mobile .fc-timegrid-event-harness-abs .fc-timegrid-event.fc-event-start.fc-event-end {
+  margin: 0 !important;
+}
+.eaec-weekly-calendar-mobile .fc-col-header-cell {
+  padding: 4px 1px;
+}
+.eaec-weekly-calendar-mobile .fc-col-header-cell-cushion {
+  padding: 0;
+}
+.eaec-weekly-calendar-mobile th .fc-scrollgrid-sync-inner {
+  text-align: center;
+}
+.eaec-weekly-calendar-mobile .fc-timegrid-day-top {
+  -webkit-justify-content: center;
+          justify-content: center;
+  padding: 12px 0 0;
+}
+.eaec-weekly-calendar-mobile .fc-toolbar-chunk,
+.eaec-weekly-calendar-mobile .eaec-controls-component {
+  margin-bottom: 20px;
+}
+.eaec-weekly-calendar-mobile .fc-toolbar {
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-filter-component {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  position: relative;
+}
+.eaec-filter-current {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: solid 1px rgba(17,17,17,0.12);
+  cursor: pointer;
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: 0.2s ease all;
+}
+.eaec-filter-currentText {
+  font-size: 13px;
+  line-height: 1.2;
+  text-align: right;
+  color: #111;
+  text-transform: uppercase;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: 0.2s ease all;
+}
+.eaec-filter-currentIcon {
+  margin-left: 20px;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  transition: 0.2s ease all;
+}
+.eaec-filter-filtered {
+  background-color: #222;
+}
+.eaec-filter-filtered .eaec-filter-currentText {
+  color: #fff;
+}
+.eaec-filter-modal {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  border-radius: 8px;
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+  background-color: #fff;
+  padding: 8px 0;
+  margin-top: 4px;
+  width: 200px;
+  z-index: 100;
+  transition: 0.2s ease all;
+}
+.eaec-filter-item {
+  font-size: 15px;
+  line-height: 20px;
+  color: #111;
+  padding: 8px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.eaec-filter-item:hover {
+  background-color: rgba(17,17,17,0.06);
+}
+.eaec-filter-active {
+  background-color: rgba(17,17,17,0.1);
+}
+.eaec-filter-active:hover {
+  background-color: rgba(17,17,17,0.1);
+}
+.eaec-filter-show {
+  opacity: 1;
+  pointer-events: all;
+  visibility: visible;
+  margin-top: 10px;
+}
+.eaec-filter-actions {
+  margin: 8px 16px 0;
+}
+.eaec-filter-clear {
+  padding: 8px 16px;
+  margin: 8px -16px -4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 11px;
+  text-align: right;
+}
+.eaec-filter-clear:hover {
+  text-decoration: underline;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.PresetDateRangePicker_panel {
+  padding: 0 22px 11px
+}
+.PresetDateRangePicker_button {
+  position: relative;
+  height: 100%;
+  text-align: center;
+  background: 0 0;
+  border: 2px solid #00a699;
+  color: #00a699;
+  padding: 4px 12px;
+  margin-right: 8px;
+  font: inherit;
+  font-weight: 700;
+  line-height: normal;
+  overflow: visible;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer
+}
+.PresetDateRangePicker_button:active {
+  outline: 0
+}
+.PresetDateRangePicker_button__selected {
+  color: #fff;
+  background: #00a699
+}
+.SingleDatePickerInput {
+  display: inline-block;
+  background-color: #fff
+}
+.SingleDatePickerInput__withBorder {
+  border-radius: 2px;
+  border: 1px solid #dbdbdb
+}
+.SingleDatePickerInput__rtl {
+  direction: rtl
+}
+.SingleDatePickerInput__disabled {
+  background-color: #f2f2f2
+}
+.SingleDatePickerInput__block {
+  display: block
+}
+.SingleDatePickerInput__showClearDate {
+  padding-right: 30px
+}
+.SingleDatePickerInput_clearDate {
+  background: 0 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 10px 0 5px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%)
+}
+.SingleDatePickerInput_clearDate__default:focus,
+.SingleDatePickerInput_clearDate__default:hover {
+  background: #dbdbdb;
+  border-radius: 50%
+}
+.SingleDatePickerInput_clearDate__small {
+  padding: 6px
+}
+.SingleDatePickerInput_clearDate__hide {
+  visibility: hidden
+}
+.SingleDatePickerInput_clearDate_svg {
+  fill: #82888a;
+  height: 12px;
+  width: 15px;
+  vertical-align: middle
+}
+.SingleDatePickerInput_clearDate_svg__small {
+  height: 9px
+}
+.SingleDatePickerInput_calendarIcon {
+  background: 0 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px;
+  margin: 0 5px 0 10px
+}
+.SingleDatePickerInput_calendarIcon_svg {
+  fill: #82888a;
+  height: 15px;
+  width: 14px;
+  vertical-align: middle
+}
+.SingleDatePicker {
+  position: relative;
+  display: inline-block
+}
+.SingleDatePicker__block {
+  display: block
+}
+.SingleDatePicker_picker {
+  z-index: 1;
+  background-color: #fff;
+  position: absolute
+}
+.SingleDatePicker_picker__rtl {
+  direction: rtl
+}
+.SingleDatePicker_picker__directionLeft {
+  left: 0
+}
+.SingleDatePicker_picker__directionRight {
+  right: 0
+}
+.SingleDatePicker_picker__portal {
+  background-color: rgba(0,0,0,.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%
+}
+.SingleDatePicker_picker__fullScreenPortal {
+  background-color: #fff
+}
+.SingleDatePicker_closeButton {
+  background: 0 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+  z-index: 2
+}
+.SingleDatePicker_closeButton:focus,
+.SingleDatePicker_closeButton:hover {
+  color: darken(#cacccd,10%);
+  text-decoration: none
+}
+.SingleDatePicker_closeButton_svg {
+  height: 15px;
+  width: 15px;
+  fill: #cacccd
+}
+.DayPickerKeyboardShortcuts_buttonReset {
+  background: 0 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px
+}
+.DayPickerKeyboardShortcuts_buttonReset:active {
+  outline: 0
+}
+.DayPickerKeyboardShortcuts_show {
+  width: 33px;
+  height: 26px;
+  position: absolute;
+  z-index: 2
+}
+.DayPickerKeyboardShortcuts_show::before {
+  content: "";
+  display: block;
+  position: absolute
+}
+.DayPickerKeyboardShortcuts_show__bottomRight {
+  bottom: 0;
+  right: 0
+}
+.DayPickerKeyboardShortcuts_show__bottomRight::before {
+  border-top: 26px solid transparent;
+  border-right: 33px solid #00a699;
+  bottom: 0;
+  right: 0
+}
+.DayPickerKeyboardShortcuts_show__bottomRight:hover::before {
+  border-right: 33px solid #008489
+}
+.DayPickerKeyboardShortcuts_show__topRight {
+  top: 0;
+  right: 0
+}
+.DayPickerKeyboardShortcuts_show__topRight::before {
+  border-bottom: 26px solid transparent;
+  border-right: 33px solid #00a699;
+  top: 0;
+  right: 0
+}
+.DayPickerKeyboardShortcuts_show__topRight:hover::before {
+  border-right: 33px solid #008489
+}
+.DayPickerKeyboardShortcuts_show__topLeft {
+  top: 0;
+  left: 0
+}
+.DayPickerKeyboardShortcuts_show__topLeft::before {
+  border-bottom: 26px solid transparent;
+  border-left: 33px solid #00a699;
+  top: 0;
+  left: 0
+}
+.DayPickerKeyboardShortcuts_show__topLeft:hover::before {
+  border-left: 33px solid #008489
+}
+.DayPickerKeyboardShortcuts_showSpan {
+  color: #fff;
+  position: absolute
+}
+.DayPickerKeyboardShortcuts_showSpan__bottomRight {
+  bottom: 0;
+  right: 5px
+}
+.DayPickerKeyboardShortcuts_showSpan__topRight {
+  top: 1px;
+  right: 5px
+}
+.DayPickerKeyboardShortcuts_showSpan__topLeft {
+  top: 1px;
+  left: 5px
+}
+.DayPickerKeyboardShortcuts_panel {
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  padding: 22px;
+  margin: 33px;
+  text-align: left
+}
+.DayPickerKeyboardShortcuts_title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0
+}
+.DayPickerKeyboardShortcuts_list {
+  list-style: none;
+  padding: 0;
+  font-size: 14px
+}
+.DayPickerKeyboardShortcuts_close {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  z-index: 2
+}
+.DayPickerKeyboardShortcuts_close:active {
+  outline: 0
+}
+.DayPickerKeyboardShortcuts_closeSvg {
+  height: 15px;
+  width: 15px;
+  fill: #cacccd
+}
+.DayPickerKeyboardShortcuts_closeSvg:focus,
+.DayPickerKeyboardShortcuts_closeSvg:hover {
+  fill: #82888a
+}
+.CalendarDay {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center
+}
+.CalendarDay:active {
+  outline: 0
+}
+.CalendarDay__defaultCursor {
+  cursor: default
+}
+.CalendarDay__default {
+  border: 1px solid #e4e7e7;
+  color: #484848;
+  background: #fff
+}
+.CalendarDay__default:hover {
+  background: #e4e7e7;
+  border: 1px solid #e4e7e7;
+  color: inherit
+}
+.CalendarDay__hovered_offset {
+  background: #f4f5f5;
+  border: 1px double #e4e7e7;
+  color: inherit
+}
+.CalendarDay__outside {
+  border: 0;
+  background: #fff;
+  color: #484848
+}
+.CalendarDay__outside:hover {
+  border: 0
+}
+.CalendarDay__blocked_minimum_nights {
+  background: #fff;
+  border: 1px solid #eceeee;
+  color: #cacccd
+}
+.CalendarDay__blocked_minimum_nights:active,
+.CalendarDay__blocked_minimum_nights:hover {
+  background: #fff;
+  color: #cacccd
+}
+.CalendarDay__highlighted_calendar {
+  background: #ffe8bc;
+  color: #484848
+}
+.CalendarDay__highlighted_calendar:active,
+.CalendarDay__highlighted_calendar:hover {
+  background: #ffce71;
+  color: #484848
+}
+.CalendarDay__selected_span {
+  background: #66e2da;
+  border: 1px double #33dacd;
+  color: #fff
+}
+.CalendarDay__selected_span:active,
+.CalendarDay__selected_span:hover {
+  background: #33dacd;
+  border: 1px double #33dacd;
+  color: #fff
+}
+.CalendarDay__selected,
+.CalendarDay__selected:active,
+.CalendarDay__selected:hover {
+  background: #00a699;
+  border: 1px double #00a699;
+  color: #fff
+}
+.CalendarDay__hovered_span,
+.CalendarDay__hovered_span:hover {
+  background: #b2f1ec;
+  border: 1px double #80e8e0;
+  color: #007a87
+}
+.CalendarDay__hovered_span:active {
+  background: #80e8e0;
+  border: 1px double #80e8e0;
+  color: #007a87
+}
+.CalendarDay__blocked_calendar,
+.CalendarDay__blocked_calendar:active,
+.CalendarDay__blocked_calendar:hover {
+  background: #cacccd;
+  border: 1px solid #cacccd;
+  color: #82888a
+}
+.CalendarDay__blocked_out_of_range,
+.CalendarDay__blocked_out_of_range:active,
+.CalendarDay__blocked_out_of_range:hover {
+  background: #fff;
+  border: 1px solid #e4e7e7;
+  color: #cacccd
+}
+.CalendarDay__hovered_start_first_possible_end {
+  background: #eceeee;
+  border: 1px double #eceeee
+}
+.CalendarDay__hovered_start_blocked_min_nights {
+  background: #eceeee;
+  border: 1px double #e4e7e7
+}
+.CalendarMonth {
+  background: #fff;
+  text-align: center;
+  vertical-align: top;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+.CalendarMonth_table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+.CalendarMonth_verticalSpacing {
+  border-collapse: separate
+}
+.CalendarMonth_caption {
+  color: #484848;
+  font-size: 18px;
+  text-align: center;
+  padding-top: 22px;
+  padding-bottom: 37px;
+  caption-side: initial
+}
+.CalendarMonth_caption__verticalScrollable {
+  padding-top: 12px;
+  padding-bottom: 7px
+}
+.CalendarMonthGrid {
+  background: #fff;
+  text-align: left;
+  z-index: 0
+}
+.CalendarMonthGrid__animating {
+  z-index: 1
+}
+.CalendarMonthGrid__horizontal {
+  position: absolute;
+  left: 9px
+}
+.CalendarMonthGrid__vertical {
+  margin: 0 auto
+}
+.CalendarMonthGrid__vertical_scrollable {
+  margin: 0 auto;
+  overflow-y: scroll
+}
+.CalendarMonthGrid_month__horizontal {
+  display: inline-block;
+  vertical-align: top;
+  min-height: 100%
+}
+.CalendarMonthGrid_month__hideForAnimation {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none
+}
+.CalendarMonthGrid_month__hidden {
+  visibility: hidden
+}
+.DayPickerNavigation {
+  position: relative;
+  z-index: 2
+}
+.DayPickerNavigation__horizontal {
+  height: 0
+}
+.DayPickerNavigation__verticalDefault {
+  position: absolute;
+  width: 100%;
+  height: 52px;
+  bottom: 0;
+  left: 0
+}
+.DayPickerNavigation__verticalScrollableDefault {
+  position: relative
+}
+.DayPickerNavigation_button {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 0;
+  padding: 0;
+  margin: 0
+}
+.DayPickerNavigation_button__default {
+  border: 1px solid #e4e7e7;
+  background-color: #fff;
+  color: #757575
+}
+.DayPickerNavigation_button__default:focus,
+.DayPickerNavigation_button__default:hover {
+  border: 1px solid #c4c4c4
+}
+.DayPickerNavigation_button__default:active {
+  background: #f2f2f2
+}
+.DayPickerNavigation_button__disabled {
+  cursor: default;
+  border: 1px solid #f2f2f2
+}
+.DayPickerNavigation_button__disabled:focus,
+.DayPickerNavigation_button__disabled:hover {
+  border: 1px solid #f2f2f2
+}
+.DayPickerNavigation_button__disabled:active {
+  background: 0 0
+}
+.DayPickerNavigation_button__horizontalDefault {
+  position: absolute;
+  top: 18px;
+  line-height: .78;
+  border-radius: 3px;
+  padding: 6px 9px
+}
+.DayPickerNavigation_leftButton__horizontalDefault {
+  left: 22px
+}
+.DayPickerNavigation_rightButton__horizontalDefault {
+  right: 22px
+}
+.DayPickerNavigation_button__verticalDefault {
+  padding: 5px;
+  background: #fff;
+  box-shadow: 0 0 5px 2px rgba(0,0,0,.1);
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  height: 100%;
+  width: 50%
+}
+.DayPickerNavigation_nextButton__verticalDefault {
+  border-left: 0
+}
+.DayPickerNavigation_nextButton__verticalScrollableDefault {
+  width: 100%
+}
+.DayPickerNavigation_svg__horizontal {
+  height: 19px;
+  width: 19px;
+  fill: #82888a;
+  display: block
+}
+.DayPickerNavigation_svg__vertical {
+  height: 42px;
+  width: 42px;
+  fill: #484848
+}
+.DayPickerNavigation_svg__disabled {
+  fill: #f2f2f2
+}
+.DayPicker {
+  background: #fff;
+  position: relative;
+  text-align: left
+}
+.DayPicker__horizontal {
+  background: #fff
+}
+.DayPicker__verticalScrollable {
+  height: 100%
+}
+.DayPicker__hidden {
+  visibility: hidden
+}
+.DayPicker__withBorder {
+  box-shadow: 0 2px 6px rgba(0,0,0,.05),0 0 0 1px rgba(0,0,0,.07);
+  border-radius: 3px
+}
+.DayPicker_portal__horizontal {
+  box-shadow: none;
+  position: absolute;
+  left: 50%;
+  top: 50%
+}
+.DayPicker_portal__vertical {
+  position: initial
+}
+.DayPicker_focusRegion {
+  outline: 0
+}
+.DayPicker_calendarInfo__horizontal,
+.DayPicker_wrapper__horizontal {
+  display: inline-block;
+  vertical-align: top
+}
+.DayPicker_weekHeaders {
+  position: relative
+}
+.DayPicker_weekHeaders__horizontal {
+  margin-left: 9px
+}
+.DayPicker_weekHeader {
+  color: #757575;
+  position: absolute;
+  top: 62px;
+  z-index: 2;
+  text-align: left
+}
+.DayPicker_weekHeader__vertical {
+  left: 50%
+}
+.DayPicker_weekHeader__verticalScrollable {
+  top: 0;
+  display: table-row;
+  border-bottom: 1px solid #dbdbdb;
+  background: #fff;
+  margin-left: 0;
+  left: 0;
+  width: 100%;
+  text-align: center
+}
+.DayPicker_weekHeader_ul {
+  list-style: none;
+  margin: 1px 0;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 14px
+}
+.DayPicker_weekHeader_li {
+  display: inline-block;
+  text-align: center
+}
+.DayPicker_transitionContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px
+}
+.DayPicker_transitionContainer__horizontal {
+  -webkit-transition: height .2s ease-in-out;
+  -moz-transition: height .2s ease-in-out;
+  transition: height .2s ease-in-out
+}
+.DayPicker_transitionContainer__vertical {
+  width: 100%
+}
+.DayPicker_transitionContainer__verticalScrollable {
+  padding-top: 20px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow-y: scroll
+}
+.DateInput {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  position: relative;
+  display: inline-block;
+  width: 130px;
+  vertical-align: middle
+}
+.DateInput__small {
+  width: 97px
+}
+.DateInput__block {
+  width: 100%
+}
+.DateInput__disabled {
+  background: #f2f2f2;
+  color: #dbdbdb
+}
+.DateInput_input {
+  font-weight: 200;
+  font-size: 19px;
+  line-height: 24px;
+  color: #484848;
+  background-color: #fff;
+  width: 100%;
+  padding: 11px 11px 9px;
+  border: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 2px solid transparent;
+  border-left: 0;
+  border-radius: 0
+}
+.DateInput_input__small {
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: .2px;
+  padding: 7px 7px 5px
+}
+.DateInput_input__regular {
+  font-weight: auto
+}
+.DateInput_input__readOnly {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+.DateInput_input__focused {
+  outline: 0;
+  background: #fff;
+  border: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 2px solid #008489;
+  border-left: 0
+}
+.DateInput_input__disabled {
+  background: #f2f2f2;
+  font-style: italic
+}
+.DateInput_screenReaderMessage {
+  border: 0;
+  clip: rect(0,0,0,0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px
+}
+.DateInput_fang {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  left: 22px;
+  z-index: 2
+}
+.DateInput_fangShape {
+  fill: #fff
+}
+.DateInput_fangStroke {
+  stroke: #dbdbdb;
+  fill: transparent
+}
+.DateRangePickerInput {
+  background-color: #fff;
+  display: inline-block
+}
+.DateRangePickerInput__disabled {
+  background: #f2f2f2
+}
+.DateRangePickerInput__withBorder {
+  border-radius: 2px;
+  border: 1px solid #dbdbdb
+}
+.DateRangePickerInput__rtl {
+  direction: rtl
+}
+.DateRangePickerInput__block {
+  display: block
+}
+.DateRangePickerInput__showClearDates {
+  padding-right: 30px
+}
+.DateRangePickerInput_arrow {
+  display: inline-block;
+  vertical-align: middle;
+  color: #484848
+}
+.DateRangePickerInput_arrow_svg {
+  vertical-align: middle;
+  fill: #484848;
+  height: 24px;
+  width: 24px
+}
+.DateRangePickerInput_clearDates {
+  background: 0 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 10px 0 5px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%)
+}
+.DateRangePickerInput_clearDates__small {
+  padding: 6px
+}
+.DateRangePickerInput_clearDates_default:focus,
+.DateRangePickerInput_clearDates_default:hover {
+  background: #dbdbdb;
+  border-radius: 50%
+}
+.DateRangePickerInput_clearDates__hide {
+  visibility: hidden
+}
+.DateRangePickerInput_clearDates_svg {
+  fill: #82888a;
+  height: 12px;
+  width: 15px;
+  vertical-align: middle
+}
+.DateRangePickerInput_clearDates_svg__small {
+  height: 9px
+}
+.DateRangePickerInput_calendarIcon {
+  background: 0 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px;
+  margin: 0 5px 0 10px
+}
+.DateRangePickerInput_calendarIcon_svg {
+  fill: #82888a;
+  height: 15px;
+  width: 14px;
+  vertical-align: middle
+}
+.DateRangePicker {
+  position: relative;
+  display: inline-block
+}
+.DateRangePicker__block {
+  display: block
+}
+.DateRangePicker_picker {
+  z-index: 1;
+  background-color: #fff;
+  position: absolute
+}
+.DateRangePicker_picker__rtl {
+  direction: rtl
+}
+.DateRangePicker_picker__directionLeft {
+  left: 0
+}
+.DateRangePicker_picker__directionRight {
+  right: 0
+}
+.DateRangePicker_picker__portal {
+  background-color: rgba(0,0,0,.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%
+}
+.DateRangePicker_picker__fullScreenPortal {
+  background-color: #fff
+}
+.DateRangePicker_closeButton {
+  background: 0 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+  z-index: 2
+}
+.DateRangePicker_closeButton:focus,
+.DateRangePicker_closeButton:hover {
+  color: darken(#cacccd,10%);
+  text-decoration: none
+}
+.DateRangePicker_closeButton_svg {
+  height: 15px;
+  width: 15px;
+  fill: #cacccd
+}
+
+
+
+    </style>
+    <style type="text/css">.eaec-dates-component {
+  margin: 3px;
+  position: relative;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.eaec-dates-input {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: solid 1px rgba(17,17,17,0.12);
+  cursor: pointer;
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: 0.2s ease all;
+}
+.eaec-dates-inputText {
+  font-size: 13px;
+  line-height: 1.2;
+  text-align: right;
+  color: #111;
+  text-transform: uppercase;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: 0.2s ease all;
+}
+.eaec-dates-inputIcon {
+  margin-left: 20px;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  transition: 0.2s ease all;
+}
+.eaec-dates-selected {
+  background-color: #222;
+}
+.eaec-dates-selected .eaec-dates-inputText {
+  color: #fff;
+}
+.eaec-dates-calendar {
+  position: absolute;
+  top: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: 4px;
+  transition: 0.2s ease all;
+  z-index: 100;
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+  background: #fff;
+  border-radius: 8px;
+  max-width: calc(100vw - 54px);
+}
+.eaec-dates-calendar.eaec-dates-mobile {
+  max-width: 100vw;
+  left: -40px;
+}
+.eaec-dates-calendarButtons {
+  padding: 18px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.eaec-dates-calendarButton {
+  margin: 0 4px;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+          align-items: center;
+  border-radius: 4px;
+  border: 0;
+  background-color: #fff;
+  cursor: pointer;
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: 0.2s ease all;
+  font-size: 13px;
+  padding: 6px 12px;
+}
+.eaec-dates-calendarButton:hover {
+  background-color: rgba(0,0,0,0.06);
+  color: #111;
+}
+.eaec-dates-calendar .DayPickerNavigation__verticalDefault {
+  background: #fff;
+  box-shadow: 0 -6px 5px -2px rgba(0,0,0,0.1);
+  height: 42px;
+}
+.eaec-dates-calendar .DayPickerNavigation_button__default {
+  border: none;
+  box-shadow: none;
+}
+.eaec-dates-calendar .DayPickerNavigation_svg__vertical {
+  width: 32px;
+  height: 32px;
+}
+.eaec-dates-calendar .CalendarDay__highlighted_calendar {
+  background: transparent !important;
+  position: relative;
+}
+.eaec-dates-calendar .CalendarDay__highlighted_calendar.CalendarDay__selected_span,
+.eaec-dates-calendar .CalendarDay__highlighted_calendar.CalendarDay__hovered_span {
+  background: #66e2da !important;
+  position: relative;
+}
+.eaec-dates-calendar .CalendarDay__highlighted_calendar:before {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 4px;
+  left: calc(50% - 2px);
+}
+.eaec-dates-calendar .CalendarDay__selected_start,
+.eaec-dates-calendar .CalendarDay__selected_end {
+  border-color: #111;
+  background-color: #111 !important;
+  color: #fff;
+}
+.eaec-dates-calendar .CalendarDay__highlighted_calendar.CalendarDay__hovered_span,
+.eaec-dates-calendar .CalendarDay__hovered_span {
+  border-color: #e4e7e7;
+  background-color: #dadada !important;
+  color: #111;
+}
+.eaec-dates-calendar .CalendarDay__highlighted_calendar.CalendarDay__selected_span,
+.eaec-dates-calendar .CalendarDay__selected_span {
+  border-color: #e4e7e7;
+  background-color: #999 !important;
+  color: #fff;
+}
+.eaec-dates-activeCalendarDay {
+  background-color: #00a699;
+  color: #fff;
+}
+.eaec-dates-activeCalendarDay:hover {
+  background-color: #00a699;
+  color: #fff;
+}
+.eaec-dates-show {
+  margin-top: 10px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+.eaec-dates-footer {
+  padding: 0 18px 18px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.eaec-dates-mobile {
+  padding-top: 8px;
+}
+.eaec-dates-clear {
+  border: 0;
+  background-color: #fff;
+  cursor: pointer;
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: 0.2s ease all;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #111;
+}
+.eaec-dates-clear:hover {
+  color: #111;
+  background-color: transparent;
+  text-decoration: underline;
+}
+.eaec-dates-submit {
+  border: 0;
+  padding: 6px 12px;
+  background-color: #eee;
+  cursor: pointer;
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: 0.2s ease all;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #111;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: relative;
+  top: 0;
+  border-radius: 4px;
+}
+.eaec-dates-submit:hover {
+  top: -4px;
+}
+.eaec-dates-showSubmit {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-controls-component {
+  margin: -3px;
+  margin-top: 20px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.eaec-controls-item {
+  margin: 3px;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-events-calendar-component {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  min-width: 250px;
+}
+.eaec-events-calendar-component:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+.eaec-events-calendar-calendar {
+  display: block;
+  min-height: 580px;
+}
+.eaec-events-calendar-title {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.2;
+  color: currentColor;
+  z-index: 1;
+  position: relative;
+}
+.eaec-events-calendar-header {
+  margin-bottom: 30px;
+}
+.eaec-events-calendar-layout {
+  z-index: 1;
+  position: relative;
+}
+
+
+
+
+    </style>
+    <style type="text/css">.eaec-error-text {
+  font-size: 16px;
+  line-height: 24px;
+  color: currentColor;
+}
+
+
+
+
+    </style>
+    <style type="text/css">body {
+  padding: 0 20px;
+  font: 400 normal 15px/1.3 -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+}
+.eapps-preview-widget {
+  width: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin: 0 auto;
+  min-width: 150px;
+  min-height: 100%;
+  transition: 0.2s;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+.eapps-preview {
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  overflow: unset;
+}
+
+
+
+
+    </style>
+    <style type="text/css" data-styled-jsx=""></style>
+    <style data-styled="active" data-styled-version="5.1.0"></style>
+</head>
+<body>
+<!-- Navigation 1 -->
+<nav class="pt-15 pb-15 text-center navigation_1 bg-action-3">
+    <div class="container px-xl-0">
+        <div class="row justify-content-center align-items-center f-16">
+            <div class="mb-20 mb-lg-0 col-lg-3 text-lg-left">
+                <a href="index.html" class="link img_link">
+                    <img src="i/logo.png" alt="Logo" class="img-fluid" data-aos="fade-down" data-aos-delay="250">
+                </a>
+            </div>
+            <div class="col-lg-6" data-aos="fade-down" data-aos-delay="0">
+                <a href="#about-us" class="link mx-15 color-white">
+                    About Us
+                </a>
+                <a href="#mentors" class="link mx-15 color-white">
+                    Mentors
+                </a>
+                <a href="#events" class="link mx-15 color-white">
+                    Events
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- Content 2 -->
+<section class="pt-105 pb-95 content_2 bg-light">
+    <div class="container px-xl-0 text-center">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <h2 data-aos="fade-down" data-aos-delay="0">
+                    ART OF GIVING
+                </h2>
+            </div>
+            <div class="col-xl-7 col-lg-9 col-md-10">
+                <div class="mt-35 f-18 medium color-heading op-7 text-adaptive" data-aos="fade-down"
+                     data-aos-delay="250">
+                    We should return what we receive. Since you get more joy out of giving joy to others, you should put
+                    a good deal of thought into the happiness that you are able to give.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Feature 1 -->
+<section id="about-us" class="pt-50 pb-45 text-center feature_1 bg-gray">
+    <div class="container px-xl-0">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <h2 class="mb-45 small" data-aos="fade-down" data-aos-delay="0">
+                    About Us
+                </h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-4 mb-50" data-aos="fade-down" data-aos-delay="250">
+                        <i class="fas fa-briefcase f-60 action-3">
+                        </i>
+                        <div class="mt-20 mb-25 f-22 title">
+                            Who We Are ?
+                        </div>
+                        <div class="color-heading text-adaptive">
+                            Group of people who believes in Art of giving from the deep inside among us,
+                            enthusiast towards technology and make use of it to solve real work problems
+                            around us
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-50" data-aos="fade-down" data-aos-delay="500">
+                        <i class="fas fa-compress-arrows-alt f-60 action-3">
+                        </i>
+                        <div class="mt-20 mb-25 f-22 title">
+                            What We Do ?
+                        </div>
+                        <div class="color-heading text-adaptive">
+                            We provide the mentorship to different set of people who have the desire to
+                            do wonders in the field of IT. Try to understand the problems of those and
+                            help them to grow by solving it.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-50" data-aos="fade-down" data-aos-delay="750">
+                        <i class="fas fa-desktop f-60 action-3">
+                        </i>
+                        <div class="mt-20 mb-25 f-22 title">
+                            Why We Do ?
+                        </div>
+                        <div class="color-heading text-adaptive">
+                            We believe that whatever we get from the society we should return also by one
+                            or the other way, So as we have got our technical skills from here only
+                            that's why would like to return it back to the society by making our next
+                            generation more skilled.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Team 1 -->
+<section id="mentors" class="pt-50 pb-100 bg-light text-center team_1">
+    <div class="container px-xl-0">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <h2 class="mb-20 small" data-aos="fade-down" data-aos-delay="0">
+                    Mentors
+                </h2>
+                <div class="f-22 color-heading text-adaptive" data-aos="fade-down" data-aos-delay="250">
+                    Mentors are an important part of personal and professional development. They are guides through
+                    times when people need someone that is able to point them in the right direction. Good mentors are
+                    enthusiastic people, enjoying the role they play in helping others achieve their goals.
+                </div>
+            </div>
+        </div>
+        <div class="mt-20 row justify-content-center">
+            <div class="mt-30 col-lg-4 col-md-7 col-sm-10" data-aos="fade-down" data-aos-delay="0">
+                <div class="radius10 pt-50 block">
+                    <img src="i/team_1_img_1.jpg" srcset="i/team_sp@2x.jpg 2x" alt="" class="radius_full">
+                    <div class="mt-25 mb-15 f-22 title">
+                        Saurabha Pandey
+                    </div>
+                    <div class="f-14 sp-10 color-heading text-left px-10">
+                        He has around 14 years of experience in Java/J2EE/Python distributed Internet / Intranet
+                        Based Applications as Technical Lead/Manager. He loves teaching and mentoring students.
+                    </div>
+                    <div class="mt-20 row no-gutters block_socials">
+                        <div class="col-4 border_right">
+                            <a href="https://stackoverflow.com/users/5704417/saurabha" class="link f-22 lh-60 color-heading" target="_blank">
+                                <i class="fab fa-stack-overflow">
+                                </i>
+                            </a>
+                        </div>
+                        <div class="col-4 border_right">
+                            <a href="https://www.linkedin.com/in/pandeysaurabha/" class="link f-22 lh-60 color-heading" target="_blank">
+                                <i class="fab fa-linkedin">
+                                </i>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="https://github.com/pandeysaurabha/" class="link f-22 lh-60 color-heading" target="_blank">
+                                <i class="fab fa-github">
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-30 col-lg-4 col-md-7 col-sm-10" data-aos="fade-down" data-aos-delay="250">
+                <div class="radius10 pt-50 block">
+                    <img src="i/team_1_img_2.jpg" srcset="i/team_ksp@2x.jpg 2x" alt=""
+                         class="radius_full">
+                    <div class="mt-25 mb-15 f-22 title">
+                        Koushlendra Singh Parihar
+                    </div>
+                    <div class="f-14 sp-10 color-heading text-left px-10">
+                        Having 8+ years of experience in JAVA/J2EE and extensive knowledge base adaptive to diverse
+                        situations.
+                        Always tends towards mentoring students as well as working professionals.
+                    </div>
+                    <div class="mt-20 row no-gutters block_socials">
+                        <div class="col-4 border_right">
+                            <a href="https://stackoverflow.com/users/5150732/koushlendra" class="link f-22 lh-60 color-heading" target="_blank">
+                                <i class="fab fa-stack-overflow">
+                                </i>
+                            </a>
+                        </div>
+                        <div class="col-4 border_right">
+                            <a href="https://www.linkedin.com/in/skoushlendra/" class="link f-22 lh-60 color-heading" target="_blank">
+                                <i class="fab fa-linkedin">
+                                </i>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="https://github.com/skoushlendra/" class="link f-22 lh-60 color-heading" target="_blank">
+                                <i class="fab fa-github">
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Showcase 2 -->
+<section id="events" class="pt-50 pb-90 text-center showcase_2 bg-gray">
+    <div class="container px-xl-0">
+        <div class="row justify-content-center mb-30">
+            <h2 class="small aos-init aos-animate" data-aos="fade-down" data-aos-delay="0">
+                Scheduled Events
+            </h2>
+        </div>
+
+        <div class="row row-striped">
+            <div class="col-2 text-right">
+                <h2 class="display-4"><span class="badge badge-secondary">24</span></h2>
+                <h3>APR</h3>
+            </div>
+            <div class="col-10">
+                <h4 class="text-uppercase text-left"><strong>Java: Handling Exceptions</strong></h4>
+                <ul class="list-inline text-left scheduled-events ">
+                    <li class="list-inline-item"><i class="far fa-calendar-alt" aria-hidden="true"></i> Saturday</li>
+                    <li class="list-inline-item"><i class="far fa-clock" aria-hidden="true"></i>
+                        11:00 AM - 1:00 PM
+                    </li>
+                </ul>
+                <p class="text-left">Lorem ipsum dolsit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+        <div class="row row-striped">
+            <div class="col-2 text-right">
+                <h2 class="display-4"><span class="badge badge-secondary">17</span></h2>
+                <h3>APR</h3>
+            </div>
+            <div class="col-10">
+                <h4 class="text-uppercase text-left"><strong>OOPS Introduction</strong></h4>
+                <ul class="list-inline text-left scheduled-events ">
+                    <li class="list-inline-item"><i class="far fa-calendar-alt"
+                                                    aria-hidden="true"></i> Saturday
+                    </li>
+                    <li class="list-inline-item"><i class="far fa-clock" aria-hidden="true"></i>
+                        11:00 AM - 1:00 PM
+                    </li>
+                </ul>
+                <p class="text-left">Lorem ipsum dolsit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+        <!--
+        <div class="row">
+            <div class="jsx-403451104 eaec-events-calendar-layout">
+                <div class="eaec-list-component">
+                    <div class="eaec-list-item">
+                        <div class="eaec-list-items">
+                            <div class="jsx-530949731 eaec-list-item-component">
+                                <div class="jsx-2558652027 eaec-date-element-component eaec-list-item-date  eaec-date-element-inline">
+                                    <div class="jsx-2558652027 eaec-date-element-start">
+                                        <div class="jsx-2558652027 eaec-date-element-month">Dec</div>
+                                        <div class="jsx-2558652027 eaec-date-element-day">1</div>
+                                    </div>
+                                </div>
+                                <div class="jsx-530949731 eaec-list-item-infoContainer">
+                                    <div class="jsx-530949731 eaec-list-item-info">
+                                        <div class="jsx-530949731 eaec-list-item-imageContainer"><img
+                                                src="https://files.elfsight.com/storage/_assets/events-calendar/test-data/match-1.png"
+                                                alt="" class="eaec-media-image eaec-media-loaded"></div>
+                                        <div class="jsx-530949731 eaec-list-item-infoInner">
+                                            <div class="jsx-1812849110 eaec-category-component">
+                                                <div class="jsx-1812849110 eaec-category-item">Away</div>
+                                            </div>
+                                            <div class="jsx-2559038396 eaec-name-component eaec-list-item-name">
+                                                vs.Astros
+                                            </div>
+                                            <div class="jsx-530949731 eaec-list-item-locationAndTime">
+                                                <div class="jsx-2607346497 eaec-time-component eaec-list-item-time">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 12 12" class="jsx-2607346497 eaec-time-icon">
+                                                        <path d="M6 12A6 6 0 1 0 6 0a6 6 0 0 0 0 12zm.984-4.97a.454.454 0 0 1-.07.154l-.026.038a.5.5 0 0 1-.655.148L3.55 5.857a.454.454 0 0 1-.149-.655.551.551 0 0 1 .722-.164l1.877 1.059V2.9a.5.5 0 1 1 1 0v4a.5.5 0 0 1-.017.13z"
+                                                              class="jsx-2607346497"></path>
+                                                    </svg>
+                                                    <div class="jsx-2607346497 eaec-time-text">
+                                                        <div title="03:00 PM - 05:00 PM"
+                                                             class="jsx-2607346497 eaec-time-time">03:00 PM - 05:00 PM
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div title="AT&amp;T Park – San Francisco Giants"
+                                                     class="jsx-3407839657 eaec-location-component eaec-list-item-location">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 10 12" class="jsx-3407839657 eaec-location-icon">
+                                                        <path d="M5 12C1.667 9.174 0 6.84 0 5a5 5 0 1 1 10 0c0 1.84-1.667 4.174-5 7zm0-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                                                              class="jsx-3407839657"></path>
+                                                    </svg>
+                                                    <div class="jsx-3407839657 eaec-location-text">AT&amp;T Park – San
+                                                        Francisco Giants
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jsx-3379200277 eaec-button-element-component eaec-list-item-button">
+                                            <div class="eaec-button-component">
+                                                <div class="Button__Block-sc-1c0eo6i-0 bhCgZe jsx-1242324630 eaec-button-link"
+                                                     tabindex="0" role="button">Get Tickets
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jsx-530949731 eaec-list-item-component">
+                                <script type="application/ld+json">{
+                                    "@context": "https://schema.org/",
+                                    "@type": "Event",
+                                    "name": "vs.Rangers",
+                                    "location": {
+                                        "@type": "AdministrativeArea",
+                                        "name": "Petco Park – San Diego Padres",
+                                        "address": "100 Park Blvd, San Diego, CA 92101, USA"
+                                    },
+                                    "startDate": "2030-12-02T09:30:00.000Z",
+                                    "endDate": "2030-12-02T11:30:00.000Z"
+                                }</script>
+                                <div class="jsx-2558652027 eaec-date-element-component eaec-list-item-date  eaec-date-element-inline">
+                                    <div class="jsx-2558652027 eaec-date-element-start">
+                                        <div class="jsx-2558652027 eaec-date-element-month">Dec</div>
+                                        <div class="jsx-2558652027 eaec-date-element-day">2</div>
+                                    </div>
+                                </div>
+                                <div class="jsx-530949731 eaec-list-item-infoContainer">
+                                    <div class="jsx-530949731 eaec-list-item-info">
+                                        <div class="jsx-530949731 eaec-list-item-imageContainer"><img
+                                                src="https://files.elfsight.com/storage/_assets/events-calendar/test-data/match-2.png"
+                                                alt="" class="eaec-media-image eaec-media-loaded"></div>
+                                        <div class="jsx-530949731 eaec-list-item-infoInner">
+                                            <div class="jsx-1812849110 eaec-category-component">
+                                                <div class="jsx-1812849110 eaec-category-item">Away</div>
+                                            </div>
+                                            <div class="jsx-2559038396 eaec-name-component eaec-list-item-name">
+                                                vs.Rangers
+                                            </div>
+                                            <div class="jsx-530949731 eaec-list-item-locationAndTime">
+                                                <div class="jsx-2607346497 eaec-time-component eaec-list-item-time">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 12 12" class="jsx-2607346497 eaec-time-icon">
+                                                        <path d="M6 12A6 6 0 1 0 6 0a6 6 0 0 0 0 12zm.984-4.97a.454.454 0 0 1-.07.154l-.026.038a.5.5 0 0 1-.655.148L3.55 5.857a.454.454 0 0 1-.149-.655.551.551 0 0 1 .722-.164l1.877 1.059V2.9a.5.5 0 1 1 1 0v4a.5.5 0 0 1-.017.13z"
+                                                              class="jsx-2607346497"></path>
+                                                    </svg>
+                                                    <div class="jsx-2607346497 eaec-time-text">
+                                                        <div title="03:00 PM - 05:00 PM"
+                                                             class="jsx-2607346497 eaec-time-time">03:00 PM - 05:00 PM
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div title="Petco Park – San Diego Padres"
+                                                     class="jsx-3407839657 eaec-location-component eaec-list-item-location">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 10 12" class="jsx-3407839657 eaec-location-icon">
+                                                        <path d="M5 12C1.667 9.174 0 6.84 0 5a5 5 0 1 1 10 0c0 1.84-1.667 4.174-5 7zm0-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                                                              class="jsx-3407839657"></path>
+                                                    </svg>
+                                                    <div class="jsx-3407839657 eaec-location-text">Petco Park – San
+                                                        Diego Padres
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jsx-3379200277 eaec-button-element-component eaec-list-item-button">
+                                            <div class="eaec-button-component">
+                                                <div class="Button__Block-sc-1c0eo6i-0 bhCgZe jsx-1242324630 eaec-button-link"
+                                                     tabindex="0" role="button">Get Tickets
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jsx-1264124373 eaec-list-item-component">
+                                <script type="application/ld+json">{
+                                    "@context": "https://schema.org/",
+                                    "@type": "Event",
+                                    "name": "vs.Angels",
+                                    "location": {
+                                        "@type": "AdministrativeArea",
+                                        "name": "AT&T Park – San Francisco Giants",
+                                        "address": "24 Willie Mays Plaza, San Francisco, CA 94107, USA"
+                                    },
+                                    "startDate": "2030-12-03T09:30:00.000Z",
+                                    "endDate": "2030-12-03T11:30:00.000Z"
+                                }</script>
+                                <div class="jsx-2558652027 eaec-date-element-component eaec-list-item-date  eaec-date-element-inline">
+                                    <div class="jsx-2558652027 eaec-date-element-start">
+                                        <div class="jsx-2558652027 eaec-date-element-month">Dec</div>
+                                        <div class="jsx-2558652027 eaec-date-element-day">3</div>
+                                    </div>
+                                </div>
+                                <div class="jsx-1264124373 eaec-list-item-infoContainer">
+                                    <div class="jsx-1264124373 eaec-list-item-info">
+                                        <div class="jsx-1264124373 eaec-list-item-imageContainer"><img
+                                                src="https://files.elfsight.com/storage/a917320b-9caf-4dca-808d-c96251e5748e/3c0b9686-a145-480d-96f7-bf63a06ab497.png"
+                                                alt="" class="eaec-media-image eaec-media-loaded"></div>
+                                        <div class="jsx-1264124373 eaec-list-item-infoInner">
+                                            <div class="jsx-3059372202 eaec-category-component">
+                                                <div class="jsx-3059372202 eaec-category-item">Home</div>
+                                            </div>
+                                            <div class="jsx-2458611904 eaec-name-component eaec-list-item-name">
+                                                vs.Angels
+                                            </div>
+                                            <div class="jsx-1264124373 eaec-list-item-locationAndTime">
+                                                <div class="jsx-2416248509 eaec-time-component eaec-list-item-time">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 12 12" class="jsx-2416248509 eaec-time-icon">
+                                                        <path d="M6 12A6 6 0 1 0 6 0a6 6 0 0 0 0 12zm.984-4.97a.454.454 0 0 1-.07.154l-.026.038a.5.5 0 0 1-.655.148L3.55 5.857a.454.454 0 0 1-.149-.655.551.551 0 0 1 .722-.164l1.877 1.059V2.9a.5.5 0 1 1 1 0v4a.5.5 0 0 1-.017.13z"
+                                                              class="jsx-2416248509"></path>
+                                                    </svg>
+                                                    <div class="jsx-2416248509 eaec-time-text">
+                                                        <div title="03:00 PM - 05:00 PM"
+                                                             class="jsx-2416248509 eaec-time-time">03:00 PM - 05:00 PM
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div title="AT&amp;T Park – San Francisco Giants"
+                                                     class="jsx-740504405 eaec-location-component eaec-list-item-location">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 10 12" class="jsx-740504405 eaec-location-icon">
+                                                        <path d="M5 12C1.667 9.174 0 6.84 0 5a5 5 0 1 1 10 0c0 1.84-1.667 4.174-5 7zm0-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                                                              class="jsx-740504405"></path>
+                                                    </svg>
+                                                    <div class="jsx-740504405 eaec-location-text">AT&amp;T Park – San
+                                                        Francisco Giants
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jsx-1128314857 eaec-button-element-component eaec-list-item-button">
+                                            <div class="eaec-button-component">
+                                                <div class="Button__Block-sc-1c0eo6i-0 bhCgZe jsx-1242324630 eaec-button-link"
+                                                     tabindex="0" role="button">Get Tickets
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jsx-1264124373 eaec-list-item-component">
+                                <script type="application/ld+json">{
+                                    "@context": "https://schema.org/",
+                                    "@type": "Event",
+                                    "name": "vs.Twins",
+                                    "location": {
+                                        "@type": "AdministrativeArea",
+                                        "name": "Petco Park – San Diego Padres",
+                                        "address": "100 Park Blvd, San Diego, CA 92101, USA"
+                                    },
+                                    "startDate": "2030-12-04T09:30:00.000Z",
+                                    "endDate": "2030-12-04T11:30:00.000Z"
+                                }</script>
+                                <div class="jsx-2558652027 eaec-date-element-component eaec-list-item-date  eaec-date-element-inline">
+                                    <div class="jsx-2558652027 eaec-date-element-start">
+                                        <div class="jsx-2558652027 eaec-date-element-month">Dec</div>
+                                        <div class="jsx-2558652027 eaec-date-element-day">4</div>
+                                    </div>
+                                </div>
+                                <div class="jsx-1264124373 eaec-list-item-infoContainer">
+                                    <div class="jsx-1264124373 eaec-list-item-info">
+                                        <div class="jsx-1264124373 eaec-list-item-imageContainer"><img
+                                                src="https://files.elfsight.com/storage/_assets/events-calendar/test-data/match-4.png"
+                                                alt="" class="eaec-media-image eaec-media-loaded"></div>
+                                        <div class="jsx-1264124373 eaec-list-item-infoInner">
+                                            <div class="jsx-3059372202 eaec-category-component">
+                                                <div class="jsx-3059372202 eaec-category-item">Home</div>
+                                            </div>
+                                            <div class="jsx-2458611904 eaec-name-component eaec-list-item-name">
+                                                vs.Twins
+                                            </div>
+                                            <div class="jsx-1264124373 eaec-list-item-locationAndTime">
+                                                <div class="jsx-2416248509 eaec-time-component eaec-list-item-time">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 12 12" class="jsx-2416248509 eaec-time-icon">
+                                                        <path d="M6 12A6 6 0 1 0 6 0a6 6 0 0 0 0 12zm.984-4.97a.454.454 0 0 1-.07.154l-.026.038a.5.5 0 0 1-.655.148L3.55 5.857a.454.454 0 0 1-.149-.655.551.551 0 0 1 .722-.164l1.877 1.059V2.9a.5.5 0 1 1 1 0v4a.5.5 0 0 1-.017.13z"
+                                                              class="jsx-2416248509"></path>
+                                                    </svg>
+                                                    <div class="jsx-2416248509 eaec-time-text">
+                                                        <div title="03:00 PM - 05:00 PM"
+                                                             class="jsx-2416248509 eaec-time-time">03:00 PM - 05:00 PM
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div title="Petco Park – San Diego Padres"
+                                                     class="jsx-740504405 eaec-location-component eaec-list-item-location">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 10 12" class="jsx-740504405 eaec-location-icon">
+                                                        <path d="M5 12C1.667 9.174 0 6.84 0 5a5 5 0 1 1 10 0c0 1.84-1.667 4.174-5 7zm0-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                                                              class="jsx-740504405"></path>
+                                                    </svg>
+                                                    <div class="jsx-740504405 eaec-location-text">Petco Park – San Diego
+                                                        Padres
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jsx-1128314857 eaec-button-element-component eaec-list-item-button">
+                                            <div class="eaec-button-component">
+                                                <div class="Button__Block-sc-1c0eo6i-0 bhCgZe jsx-1242324630 eaec-button-link"
+                                                     tabindex="0" role="button">Get Tickets
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jsx-530949731 eaec-list-item-component">
+                                <script type="application/ld+json">{
+                                    "@context": "https://schema.org/",
+                                    "@type": "Event",
+                                    "name": "vs.Tigers",
+                                    "location": {
+                                        "@type": "AdministrativeArea",
+                                        "name": "AT&T Park – San Francisco Giants",
+                                        "address": "24 Willie Mays Plaza, San Francisco, CA 94107, USA"
+                                    },
+                                    "startDate": "2030-12-05T09:30:00.000Z",
+                                    "endDate": "2030-12-05T11:30:00.000Z"
+                                }</script>
+                                <div class="jsx-2558652027 eaec-date-element-component eaec-list-item-date  eaec-date-element-inline">
+                                    <div class="jsx-2558652027 eaec-date-element-start">
+                                        <div class="jsx-2558652027 eaec-date-element-month">Dec</div>
+                                        <div class="jsx-2558652027 eaec-date-element-day">5</div>
+                                    </div>
+                                </div>
+                                <div class="jsx-530949731 eaec-list-item-infoContainer">
+                                    <div class="jsx-530949731 eaec-list-item-info">
+                                        <div class="jsx-530949731 eaec-list-item-imageContainer"><img
+                                                src="https://files.elfsight.com/storage/_assets/events-calendar/test-data/match-5.png"
+                                                alt="" class="eaec-media-image eaec-media-loaded"></div>
+                                        <div class="jsx-530949731 eaec-list-item-infoInner">
+                                            <div class="jsx-1812849110 eaec-category-component">
+                                                <div class="jsx-1812849110 eaec-category-item">Away</div>
+                                            </div>
+                                            <div class="jsx-2559038396 eaec-name-component eaec-list-item-name">
+                                                vs.Tigers
+                                            </div>
+                                            <div class="jsx-530949731 eaec-list-item-locationAndTime">
+                                                <div class="jsx-2607346497 eaec-time-component eaec-list-item-time">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 12 12" class="jsx-2607346497 eaec-time-icon">
+                                                        <path d="M6 12A6 6 0 1 0 6 0a6 6 0 0 0 0 12zm.984-4.97a.454.454 0 0 1-.07.154l-.026.038a.5.5 0 0 1-.655.148L3.55 5.857a.454.454 0 0 1-.149-.655.551.551 0 0 1 .722-.164l1.877 1.059V2.9a.5.5 0 1 1 1 0v4a.5.5 0 0 1-.017.13z"
+                                                              class="jsx-2607346497"></path>
+                                                    </svg>
+                                                    <div class="jsx-2607346497 eaec-time-text">
+                                                        <div title="03:00 PM - 05:00 PM"
+                                                             class="jsx-2607346497 eaec-time-time">03:00 PM - 05:00 PM
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div title="AT&amp;T Park – San Francisco Giants"
+                                                     class="jsx-3407839657 eaec-location-component eaec-list-item-location">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 10 12" class="jsx-3407839657 eaec-location-icon">
+                                                        <path d="M5 12C1.667 9.174 0 6.84 0 5a5 5 0 1 1 10 0c0 1.84-1.667 4.174-5 7zm0-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                                                              class="jsx-3407839657"></path>
+                                                    </svg>
+                                                    <div class="jsx-3407839657 eaec-location-text">AT&amp;T Park – San
+                                                        Francisco Giants
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jsx-3379200277 eaec-button-element-component eaec-list-item-button">
+                                            <div class="eaec-button-component">
+                                                <div class="Button__Block-sc-1c0eo6i-0 bhCgZe jsx-1242324630 eaec-button-link"
+                                                     tabindex="0" role="button">Get Tickets
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jsx-1264124373 eaec-list-item-component">
+                                <script type="application/ld+json">{
+                                    "@context": "https://schema.org/",
+                                    "@type": "Event",
+                                    "name": "vs.Red Sox",
+                                    "location": {
+                                        "@type": "AdministrativeArea",
+                                        "name": "Petco Park – San Diego Padres",
+                                        "address": "100 Park Blvd, San Diego, CA 92101, USA"
+                                    },
+                                    "startDate": "2030-12-06T09:30:00.000Z",
+                                    "endDate": "2030-12-06T11:30:00.000Z"
+                                }</script>
+                                <div class="jsx-2558652027 eaec-date-element-component eaec-list-item-date  eaec-date-element-inline">
+                                    <div class="jsx-2558652027 eaec-date-element-start">
+                                        <div class="jsx-2558652027 eaec-date-element-month">Dec</div>
+                                        <div class="jsx-2558652027 eaec-date-element-day">6</div>
+                                    </div>
+                                </div>
+                                <div class="jsx-1264124373 eaec-list-item-infoContainer">
+                                    <div class="jsx-1264124373 eaec-list-item-info">
+                                        <div class="jsx-1264124373 eaec-list-item-imageContainer"><img
+                                                src="https://files.elfsight.com/storage/_assets/events-calendar/test-data/match-6.png"
+                                                alt="" class="eaec-media-image eaec-media-loaded"></div>
+                                        <div class="jsx-1264124373 eaec-list-item-infoInner">
+                                            <div class="jsx-3059372202 eaec-category-component">
+                                                <div class="jsx-3059372202 eaec-category-item">Home</div>
+                                            </div>
+                                            <div class="jsx-2458611904 eaec-name-component eaec-list-item-name">vs.Red
+                                                Sox
+                                            </div>
+                                            <div class="jsx-1264124373 eaec-list-item-locationAndTime">
+                                                <div class="jsx-2416248509 eaec-time-component eaec-list-item-time">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 12 12" class="jsx-2416248509 eaec-time-icon">
+                                                        <path d="M6 12A6 6 0 1 0 6 0a6 6 0 0 0 0 12zm.984-4.97a.454.454 0 0 1-.07.154l-.026.038a.5.5 0 0 1-.655.148L3.55 5.857a.454.454 0 0 1-.149-.655.551.551 0 0 1 .722-.164l1.877 1.059V2.9a.5.5 0 1 1 1 0v4a.5.5 0 0 1-.017.13z"
+                                                              class="jsx-2416248509"></path>
+                                                    </svg>
+                                                    <div class="jsx-2416248509 eaec-time-text">
+                                                        <div title="03:00 PM - 05:00 PM"
+                                                             class="jsx-2416248509 eaec-time-time">03:00 PM - 05:00 PM
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div title="Petco Park – San Diego Padres"
+                                                     class="jsx-740504405 eaec-location-component eaec-list-item-location">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 10 12" class="jsx-740504405 eaec-location-icon">
+                                                        <path d="M5 12C1.667 9.174 0 6.84 0 5a5 5 0 1 1 10 0c0 1.84-1.667 4.174-5 7zm0-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                                                              class="jsx-740504405"></path>
+                                                    </svg>
+                                                    <div class="jsx-740504405 eaec-location-text">Petco Park – San Diego
+                                                        Padres
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jsx-1128314857 eaec-button-element-component eaec-list-item-button">
+                                            <div class="eaec-button-component">
+                                                <div class="Button__Block-sc-1c0eo6i-0 bhCgZe jsx-1242324630 eaec-button-link"
+                                                     tabindex="0" role="button">Get Tickets
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jsx-530949731 eaec-list-item-component">
+                                <script type="application/ld+json">{
+                                    "@context": "https://schema.org/",
+                                    "@type": "Event",
+                                    "name": "vs.Royals",
+                                    "location": {
+                                        "@type": "AdministrativeArea",
+                                        "name": "AT&T Park – San Francisco Giants",
+                                        "address": "24 Willie Mays Plaza, San Francisco, CA 94107, USA"
+                                    },
+                                    "startDate": "2030-12-07T09:30:00.000Z",
+                                    "endDate": "2030-12-07T11:30:00.000Z"
+                                }</script>
+                                <div class="jsx-2558652027 eaec-date-element-component eaec-list-item-date  eaec-date-element-inline">
+                                    <div class="jsx-2558652027 eaec-date-element-start">
+                                        <div class="jsx-2558652027 eaec-date-element-month">Dec</div>
+                                        <div class="jsx-2558652027 eaec-date-element-day">7</div>
+                                    </div>
+                                </div>
+                                <div class="jsx-530949731 eaec-list-item-infoContainer">
+                                    <div class="jsx-530949731 eaec-list-item-info">
+                                        <div class="jsx-530949731 eaec-list-item-imageContainer"><img
+                                                src="https://files.elfsight.com/storage/_assets/events-calendar/test-data/match-3.png"
+                                                alt="" class="eaec-media-image eaec-media-loaded"></div>
+                                        <div class="jsx-530949731 eaec-list-item-infoInner">
+                                            <div class="jsx-1812849110 eaec-category-component">
+                                                <div class="jsx-1812849110 eaec-category-item">Away</div>
+                                            </div>
+                                            <div class="jsx-2559038396 eaec-name-component eaec-list-item-name">
+                                                vs.Royals
+                                            </div>
+                                            <div class="jsx-530949731 eaec-list-item-locationAndTime">
+                                                <div class="jsx-2607346497 eaec-time-component eaec-list-item-time">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 12 12" class="jsx-2607346497 eaec-time-icon">
+                                                        <path d="M6 12A6 6 0 1 0 6 0a6 6 0 0 0 0 12zm.984-4.97a.454.454 0 0 1-.07.154l-.026.038a.5.5 0 0 1-.655.148L3.55 5.857a.454.454 0 0 1-.149-.655.551.551 0 0 1 .722-.164l1.877 1.059V2.9a.5.5 0 1 1 1 0v4a.5.5 0 0 1-.017.13z"
+                                                              class="jsx-2607346497"></path>
+                                                    </svg>
+                                                    <div class="jsx-2607346497 eaec-time-text">
+                                                        <div title="03:00 PM - 05:00 PM"
+                                                             class="jsx-2607346497 eaec-time-time">03:00 PM - 05:00 PM
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div title="AT&amp;T Park – San Francisco Giants"
+                                                     class="jsx-3407839657 eaec-location-component eaec-list-item-location">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                         viewBox="0 0 10 12" class="jsx-3407839657 eaec-location-icon">
+                                                        <path d="M5 12C1.667 9.174 0 6.84 0 5a5 5 0 1 1 10 0c0 1.84-1.667 4.174-5 7zm0-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                                                              class="jsx-3407839657"></path>
+                                                    </svg>
+                                                    <div class="jsx-3407839657 eaec-location-text">AT&amp;T Park – San
+                                                        Francisco Giants
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jsx-3379200277 eaec-button-element-component eaec-list-item-button">
+                                            <div class="eaec-button-component">
+                                                <div class="Button__Block-sc-1c0eo6i-0 bhCgZe jsx-1242324630 eaec-button-link"
+                                                     tabindex="0" role="button">Get Tickets
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+</section>
+<!-- Testimonial 1 -->
+<!--
+<section class="pt-80 pb-80 testimonial_1 bg-light">
+    <div class="container px-xl-0">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <h4 class="mb-20 text-center" data-aos="fade-down" data-aos-delay="0">
+                    Testimonials
+                </h4>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-11" data-aos="fade-down" data-aos-delay="0">
+                <div class="hr bg-gray h-2">
+                </div>
+            </div>
+        </div>
+        <div class="row pt-30 pb-50 inner" data-aos="fade-down" data-aos-delay="250">
+            <div class="col-xl-2 col-lg-1">
+            </div>
+            <div class="col-md-1 col-sm-2">
+                <i class="fas fa-quote-left f-36 color-gray">
+                </i>
+            </div>
+            <div class="col-xl-7 col-lg-8 col-sm-10">
+                <div class="pt-10 f-22 text-adaptive">
+                    The most important part of the Startup Framework is the samples. The samples form a set of 25 usable
+                    pages you can use as is or you can add new blocks from UI Kit.
+                </div>
+                <div class="mt-20 d-flex align-items-center author_info">
+                    <img src="i/testimonial_1_img.jpg" srcset="i/testimonial_1_img@2x.jpg 2x" alt=""
+                         class="w-60 h-60 radius_full">
+                    <div class="ml-15 color-heading f-14 semibold text-uppercase sp-20">
+                        Jessey Kirk, designmodo
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-11" data-aos="fade-down" data-aos-delay="0">
+                <div class="hr bg-gray h-2">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+-->
+<!-- Contact 2 -->
+<section class="pt-45 pb-30 text-center contact_2 bg-action-3">
+    <div class="container px-xl-0">
+        <form action="form-handler.php" method="post">
+            <div class="row justify-content-center">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-9 aos-init aos-animate" data-aos="fade-down" data-aos-delay="1000">
+                    <a href="https://forms.gle/xie7VwDtyUDryLmV6" class="btn lg w-full action-gray">
+                        Register as Mentee
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- forms alerts -->
+<div class="alert alert-success alert-dismissible fixed-top alert-form-success" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    Thanks for your message!
+</div>
+<div class="alert alert-warning alert-dismissible fixed-top alert-form-check-fields" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    Please, fill in required fields.
+</div>
+<div class="alert alert-danger alert-dismissible fixed-top alert-form-error" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <div class="message">An error occurred while sending data :( Please, check if your hosting supports PHP and check
+        how to set form data sending <a href="https://designmodo.com/startup/documentation/#form-handler"
+                                        target="_blank" class="link color-transparent-white">here</a>.
+    </div>
+</div>
+
+<!-- gReCaptcha popup (uncomment if you need a recaptcha integration) -->
+<!--
+<div class="bg-dark op-8 grecaptcha-overlay"></div>
+<div class="bg-light radius10 w-350 h-120 px-20 pt-20 pb-20 grecaptcha-popup">
+    <div class="w-full h-full d-flex justify-content-center align-items-center">
+        <div id="g-recaptcha" data-sitekey="PUT_YOUR_SITE_KEY_HERE"></div>
+    </div>
+</div>
+<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+-->
+<!-- Bootstrap 4.5.2 JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<!-- Fancybox 3 jQuery plugin JS (Open images and video in popup) -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<!--
+    Google maps JS API
+    Don't forget to replace the key "AIzaSyDP6Ex5S03nvKZJZSvGXsEAi3X_tFkua4U" to your own!
+    Learn how to get a key: https://help.designmodo.com/article/startup-google-maps-api/
+-->
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDP6Ex5S03nvKZJZSvGXsEAi3X_tFkua4U"></script>
+<!-- Slick 1.8.1 jQuery plugin JS (Sliders) -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<!-- AOS 2.3.4 jQuery plugin JS (Animations) -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<!-- Maskedinput jQuery plugin JS (Masks for input fields) -->
+<script src="js/jquery.maskedinput.min.js"></script>
+<!-- Startup JS (Custom js for all blocks) -->
+<script src="js/script.js"></script>
+</body>
+</html>
